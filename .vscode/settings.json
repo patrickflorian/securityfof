@@ -1,0 +1,7 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/locales",
+        "android/app/src/locales"
+    ],
+    "terminal.integrated.defaultProfile.windows": "Command Prompt"
+}
