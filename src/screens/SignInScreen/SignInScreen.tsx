@@ -7,9 +7,9 @@ import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, View} from 'react-native';
 import {Surface, Switch, TouchableRipple, useTheme} from 'react-native-paper';
 import {useSelector} from 'react-redux';
-import LanguageComponent from '../../components/widgets/Translation/Translation';
+import LanguageComponent from '@components/widgets/Translation/Translation';
 import {LoginForm} from './components/LoginForm';
-import { ThemeContext } from '../../context/context';
+import { ThemeContext } from '@context/context';
 
 
 const window = Dimensions.get('window');
@@ -29,10 +29,10 @@ const SignInScreen = ({}) => {
    * @description cette fonction est appelée lorsque l'utilisateur clique sur le bouton de soumission
    * @param {*} values
    */
-  const language = useSelector((state) => state.language);
+  const language = useSelector((state: any) => state.language);
 
   const theme = useTheme();
-  const { toggleTheme } = React.useContext(ThemeContext);
+  const { toggleTheme } = React.useContext<any>(ThemeContext);
   return (
     <Surface style={styles.container}>
       <ScrollView
@@ -43,7 +43,7 @@ const SignInScreen = ({}) => {
           justifyContent: 'center',
         }}
         >
-        <Image source={require('../../res/img/logo2.jpg')} style={styles.image} />
+        <Image source={require('@res/img/logo2.jpg')} style={styles.image} />
         <LoginForm /* onSubmit={onSubmit} */ language={language} />
         {/* <LanguageComponent /> */}
       </ScrollView>

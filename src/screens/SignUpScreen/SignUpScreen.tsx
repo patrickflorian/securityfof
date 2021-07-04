@@ -3,8 +3,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Surface} from 'react-native-paper';
 import { SubmissionError } from 'redux-form';
-import LanguageComponent from '../../components/widgets/Translation/Translation';
-import routenames from '../../routes';
+import LanguageComponent from '@components/widgets/Translation/Translation';
+import routenames from '@routes/index';
 import {SignUpForm} from './components/SignUpForm';
 
 const styles = StyleSheet.create({
@@ -14,11 +14,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 
-const SignUpScreen = ({navigation}) => {
-  const onSubmit = (values) => {
+const SignUpScreen = (props: any) => {
+  const {navigation} = props;
+  const onSubmit = (values: any) => {
     return sleep(2000).then(() => {
       // simulate server latency
       if (!values.username) {

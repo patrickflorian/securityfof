@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Appbar, Modal, Portal, Surface, Text} from 'react-native-paper';
-import CardContainer from '../../components/widgets/Subscription/CardContainer';
-import ContentComponent from '../../components/widgets/Subscription/Content';
+import CardContainer from '@components/widgets/Subscription/CardContainer';
+import ContentComponent from '@components/widgets/Subscription/Content';
 import HeaderComponent from '../../components/widgets/Subscription/Header';
 import SuscriptionFormScreen from './components/SuscriptionForm';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ModalComponent = (props) => {
+const ModalComponent = (props: any) => {
   const {visible, onDismiss} = props;
   return (
     <Portal>
@@ -57,7 +57,7 @@ const ModalComponent = (props) => {
     </Portal>
   );
 };
-const SuscriptionScreen = (props) => {
+const SuscriptionScreen = (props: any) => {
   const {navigation} = props;
   /** Modal states  and actions */
   const [modalvisible, setmodalVisible] = useState(false);
@@ -85,7 +85,7 @@ const SuscriptionScreen = (props) => {
         <HeaderComponent />
         <ContentComponent />
         <CardContainer
-          onItemClick={(item) => {
+          onItemClick={(item: any) => {
             setPaiement(item);
             openModal();
           }}

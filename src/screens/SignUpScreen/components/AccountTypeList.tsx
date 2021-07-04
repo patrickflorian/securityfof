@@ -3,7 +3,7 @@ const {useTranslation} = require('react-i18next');
 const {View} = require('react-native');
 const {List, Avatar} = require('react-native-paper');
 
-const AccountTypeList = (props) => {
+const AccountTypeList = (props: any) => {
   const {t, I18n} = useTranslation();
   const {onChoose} = props;
   const types = [
@@ -36,7 +36,7 @@ const AccountTypeList = (props) => {
             key={index}
             style={{alignSelf:'stretch'}}
             title={type.title}
-            left={(color, style) => <Avatar.Icon icon={type.icon} color={color} style={[style,{backgroundColor:'transparent'}]} size={50} />}
+            left={(color: any, style: any) => <Avatar.Icon icon={type.icon} color={color} style={[style,{backgroundColor:'transparent'}]} size={50} />}
             onPress={()=>onChoose(type.name)}
           />
         );

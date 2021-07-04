@@ -56,7 +56,7 @@ const CustomCard = (props: any) => {
   });
 
   return (
-    <TouchableOpacity onPress={onPress} style={[{marginLeft:60, marginVertical:5},props.style]}>
+    <TouchableOpacity setOpacityTo={1}>
       <Surface style={styles.surface}>
         <View style={styles.container}>
           <Avatar.Icon

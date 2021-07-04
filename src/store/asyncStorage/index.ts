@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const storeStringData = async (key, value) => {
+export const storeStringData = async (key: string, value: any) => {
   try {
     await AsyncStorage.setItem(key, value);
   } catch (e) {
@@ -8,7 +8,7 @@ export const storeStringData = async (key, value) => {
   }
 };
 
-export const storeObjectData = async (key, value) => {
+export const storeObjectData = async (key: string, value: any) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
@@ -17,7 +17,7 @@ export const storeObjectData = async (key, value) => {
   }
 };
 
-export const getStringData = async (key) => {
+export const getStringData = async (key: string) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -30,7 +30,7 @@ export const getStringData = async (key) => {
     return null
   }
 };
-export const getObjectData = async (key) => {
+export const getObjectData = async (key: string) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
@@ -39,7 +39,7 @@ export const getObjectData = async (key) => {
   }
 };
 
-export const mergeObjectData = async (key, value) => {
+export const mergeObjectData = async (key: string, value: any) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.mergeItem(key, jsonValue);

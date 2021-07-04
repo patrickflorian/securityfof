@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 
 import buttonstyles from './ButtonStyle.android';
 
-const ButtonComponent = (props) => {
+
+const ButtonComponent = (props: any) => {
   const theme = useTheme();
   const styles = StyleSheet.create(buttonstyles(theme));
-  const {filled, outlined, borderless, type, full, rounded} = props;
+  const {filled= false, outlined= false, borderless= false, type, full = false, rounded= false} = props;
   return (
     <Button
     {...props}

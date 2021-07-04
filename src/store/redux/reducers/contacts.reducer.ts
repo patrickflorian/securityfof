@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions';
+import  actionTypes from '@store/redux/actions';
 import { Alert } from 'react-native';
 
 
@@ -23,7 +23,7 @@ import { Alert } from 'react-native';
     result :[]
 };
 
-const ContactReducer = (state = initialState, action) => {
+const ContactReducer = (state = initialState, action :any) => {
     switch (action.type) {
         case actionTypes.LIST: {
             return {

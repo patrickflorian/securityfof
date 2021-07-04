@@ -4,24 +4,24 @@ import {CommonActions, useNavigation} from '@react-navigation/native';
 import {Headline, Surface, TextInput, useTheme} from 'react-native-paper';
 import {Field, reduxForm, SubmissionError} from 'redux-form';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {renderField} from '../../../components/widgets/FormBuilder/FieldBuilder';
-import SubmitButton from '../../../components/widgets/Button/Button';
-import {LOGIN_FORM} from '../../../constants/formNames';
-import {normalizeLower} from '../../../helpers/normalize';
+import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
+import SubmitButton from '@components/widgets/Button/Button';
+import {LOGIN_FORM} from '@constants/formNames';
+import {normalizeLower} from '@helpers/normalize';
 import { useTranslation} from 'react-i18next';
-import routenames from '../../../routes';
+import routenames from '@routes/index';
 import AsyncStorage from '@react-native-community/async-storage';
 /**
  *
  * @param {*} value
  */
-const required = (value) =>
+const required = (value: any) =>
   value || typeof value === 'number' ? undefined : 'Required';
 /**
  *
  * @param {*} max
  */
-const maxLength = (max) => (value) =>
+const maxLength = (max: any) => (value: any) =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const maxLength15 = maxLength(15);
 
@@ -30,12 +30,12 @@ const maxLength15 = maxLength(15);
  *
  * @param {*} props
  */
-const FormComponent = (props) => {
+const FormComponent = (props: any) => {
   const {t, i18n} = useTranslation();
   const {submitting} = props;
   const navigation = useNavigation();
 
-  const theme = useTheme();
+  const theme : any= useTheme();
 
   
 
@@ -64,13 +64,13 @@ const FormComponent = (props) => {
           backgroundColor: theme.colors.surface,
         }}
         validate={[required, maxLength15]}
-        right={
+        /* right={
           <TextInput.Icon
             name="email-outline"
             color={theme.colors.disabled}
             onPress={() => {}}
           />
-        }
+        } */
       />
       <Field
         name="password"
@@ -127,10 +127,10 @@ const LoginFormComponent = reduxForm({
 })(FormComponent);
 
 
-export const LoginForm = (props)=>{
+export const LoginForm = (props: any)=>{
   const navigation = useNavigation()
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const onSubmit = (values) => {
+  const sleep = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
+  const onSubmit = (values: any) => {
       return sleep(2000).then(() => {
         // simulate server latency
         if (!values.username) {

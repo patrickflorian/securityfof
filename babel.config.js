@@ -5,22 +5,25 @@ module.exports = {
     [
       'module-resolver',
       {
-        root: ["./src"],
+        
+        "root": [
+          "./src"
+        ],
         alias: {
           /**
            * Regular expression is used to match all files inside `./src` directory and map each `.src/folder/[..]` to `~folder/[..]` path
            */
-          '@classes/*': './classes/*',
-          '@components/*': './components/*',
-          '@constants/*': './constants/*',
-          '@context/*': './context/*',
-          '@helpers/*': './helpers/*',
-          '@locales/*': './locales/*',
-          '@res/*': './res/*',
-          '@routes/*': './routes/*',
-          '@screens/*': './screens/*',
-          '@services/*': './services/*',
-          '@store/*': './store/*',
+          '@classes': './src/classes',
+          '@components': './src/components',
+          '@constants': './src/constants',
+          '@context': './src/context',
+          '@helpers': './src/helpers',
+          '@locales': './src/locales',
+          '@res': './src/res',
+          '@routes': './src/routes',
+          '@screens': './src/screens',
+          '@services': './src/services',
+          '@store': './src/store',
         },
         extensions: [
           '.ios.js',

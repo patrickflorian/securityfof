@@ -1,5 +1,5 @@
 {
-  "name": "secutrityfof",
+  "name": "securityfof",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "link": "react-native link",
     "cleanAndRun": "cd android && gradlew clean && cd .. && react-native run-android",
     "release": "cd android && gradlew assembleRelease --warning-mode all",

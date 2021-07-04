@@ -8,20 +8,20 @@ import {
 import {Field, reduxForm, SubmissionError} from 'redux-form';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTranslation} from 'react-i18next';
-import {SUSCRIPTION_FORM} from '../../../constants/formNames';
-import SubmitButton from '../../../components/widgets/Button/Button';
-import {renderField} from '../../../components/widgets/FormBuilder/FieldBuilder';
+import {SUSCRIPTION_FORM} from '@constants/formNames';
+import SubmitButton from '@components/widgets/Button/Button';
+import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
 /**
  *
  * @param {*} value
  */
-const required = (value) =>
+const required = (value: any) =>
   value || typeof value === 'number' ? undefined : 'Required';
 /**
  *
  * @param {*} max
  */
-const maxLength = (max) => (value) =>
+const maxLength = (max: any) => (value: any) =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const maxLength15 = maxLength(15);
 
@@ -29,7 +29,7 @@ const maxLength15 = maxLength(15);
  *
  * @param {*} props
  */
-const FormComponent = (props) => {
+const FormComponent = (props: any) => {
   const {submitting} = props;
 
   const theme = useTheme();
@@ -61,13 +61,13 @@ const FormComponent = (props) => {
           backgroundColor: 'transparent',
         }}
         //validate={[required, maxLength15]}
-        right={
+        /* right={
           <TextInput.Icon
             name="alpha-l-box-outline"
             color={theme.colors.disabled}
             onPress={() => {}}
           />
-        }
+        } */
       />
       <Field
         //autoFocus
@@ -105,13 +105,13 @@ const FormComponent = (props) => {
           backgroundColor: 'transparent',
         }}
         //validate={[required, maxLength15]}
-        right={
+        /* right={
           <TextInput.Icon
             name="numeric"
             color={theme.colors.disabled}
             onPress={() => {}}
           />
-        }
+        } */
       />
       <Field
         //autoFocus
@@ -127,18 +127,21 @@ const FormComponent = (props) => {
           backgroundColor: 'transparent',
         }}
         //validate={[required, maxLength15]}
-        right={
+        /* right={
           <TextInput.Icon
             name="numeric"
             color={theme.colors.disabled}
             onPress={() => {}}
           />
-        }
+        } */
       />
       <SubmitButton
         type="primary"
         filled
         onPress={props.handleSubmit}
+        outlined= {false} borderless= {false}
+        full = {false} 
+        rounded= {false}
         disabled={submitting}>
         {'Souscrire '}
       </SubmitButton>

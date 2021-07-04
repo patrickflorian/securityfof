@@ -1,4 +1,7 @@
-export default normalizePhoneNumber = (value) => {
+
+export const normalizeUpper = (value: any) => value && value.toUpperCase();
+export const normalizeLower = (value: any) => value && value.toLowerCase();
+const normalizePhoneNumber = (value: any) => {
     if (!value) {
         return '';
     }
@@ -11,6 +14,4 @@ export default normalizePhoneNumber = (value) => {
     }
     return `${numberValue.slice(0, 3)}.${numberValue.slice(3, 6)}.${numberValue.slice(6, 10)}`;
 };
-
-const normalizeUpper = value => value && value.toUpperCase();
-const normalizeLower = value => value && value.toLowerCase();
+export default  normalizePhoneNumber;

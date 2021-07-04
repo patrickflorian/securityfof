@@ -5,15 +5,15 @@ import { createStackNavigator } from '@react-navigation/stack';
  * importer les vues quiseront gerees par ce navigateur a savoir
  * !LoaderScreen, SignUpScreen , SignInScreen
  */
-import { PasswordResetScreen } from '../../screens/PasswordResetScreen';
-import { SignUpScreen } from '../../screens/SignUpScreen';
-import { SignInScreen } from '../../screens/SignInScreen';
+import { PasswordResetScreen } from '@screens/PasswordResetScreen';
+import { SignUpScreen } from '@screens/SignUpScreen';
+import { SignInScreen } from '@screens/SignInScreen';
 import {HomeNavigator} from './home'
 
 /**
  * importer l'espace de nom  des routes
  */
-import routenames from '..'
+import routenames from '@routes/index'
 
 const Stack = createStackNavigator();
 const LogInNavigator = () => (<Stack.Navigator initialRouteName={routenames.SIGN_IN} screenOptions={{headerShown: false}}>

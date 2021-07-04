@@ -2,20 +2,21 @@ import React from 'react';
 import {View} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {Field} from 'redux-form/immutable';
-import {renderField} from '../../../components/widgets/FormBuilder/FieldBuilder';
-import {normalizeLower} from '../../../helpers/normalize';
+import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
+import {normalizeLower} from '@helpers/normalize';
 import {useTranslation} from 'react-i18next';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 /**
  *
  * @param {*} value
  */
-const required = (value) =>
+const required = (value: any) =>
   value || typeof value === 'number' ? undefined : 'Required';
 /**
  *
  * @param {*} max
  */
-const maxLength = (max) => (value) =>
+const maxLength = (max: any) => (value: any) =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const maxLength15 = maxLength(15);
 

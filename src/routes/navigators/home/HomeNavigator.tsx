@@ -6,19 +6,19 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
  * !HomeScreen, IncomeScreen , OutcomeScreen, AccountScreen
  */
 import {AccountNavigator} from '../account';
-import {IncomeScreen} from '../../../screens/Income';
-import {BudgetScreen} from '../../../screens/Budget';
+import {IncomeScreen} from '@screens/Income';
+import {BudgetScreen} from '@screens/Budget';
 
 /**
  * importer l'espace de nom  des routes
  */
-import routenames from '../..';
+import routenames from '@routes/index'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import DrawerContent from '../../../components/layouts/drawercontent/DrawerContent';
-import HomeScreen from '../../../screens/HomeScreen/HomeScreen';
-import SuscriptionScreen from '../../../screens/SuscriptionScreen/SuscriptionScreen';
+import DrawerContent from '@components/layouts/drawercontent/DrawerContent';
+import HomeScreen from '@screens/HomeScreen/HomeScreen';
+import SuscriptionScreen from '@screens/SuscriptionScreen/SuscriptionScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import OutcomeScreen from '../../../screens/Outcome/OutcomeScreen';
+import OutcomeScreen from '@screens/Outcome/OutcomeScreen';
 
 const Drawer = createDrawerNavigator();
 
