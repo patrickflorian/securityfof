@@ -6,14 +6,14 @@ import { createStackNavigator } from '@react-navigation/stack';
  * importer les vues quiseront gerees par ce navigateur a savoir
  * !LoaderScreen, OnBoardingScreen , LoginNvigator
  */
-import { LoaderScreen } from '../../screens/LoaderScreen';
-import { OnBoardingScreen } from '../../screens/OnBoardingScreen';
+import { LoaderScreen } from '@screens/LoaderScreen';
+import { OnBoardingScreen } from '@screens/OnBoardingScreen';
 import LogInNavigator from './LogInNavigator';
 
 /**
- * importer l'espace de nom  des routes
+ * importer l'espace de nom  des routesr
  */
-import routenames from '..'
+import routenames from '@routes/index'
 
 const Stack = createStackNavigator();
 const OnBoardingNavigator = () => (<Stack.Navigator>

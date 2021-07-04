@@ -43,7 +43,7 @@ const SignInScreen = ({}) => {
           justifyContent: 'center',
         }}
         >
-        <Image source={require('../../res/img/logo2.jpg')} style={styles.image} />
+        <Image source={require('@res/img/logo2.jpg')} style={styles.image} />
         <LoginForm /* onSubmit={onSubmit} */ language={language} />
         {/* <LanguageComponent /> */}
       </ScrollView>

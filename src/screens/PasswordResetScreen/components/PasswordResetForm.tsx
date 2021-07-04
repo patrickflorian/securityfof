@@ -3,7 +3,7 @@ import {Alert, View, Text, SafeAreaView, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Caption, Surface, TextInput, useTheme} from 'react-native-paper';
 import {Field, reduxForm} from 'redux-form/immutable';
-import {renderField} from '../../../components/widgets/FormBuilder/FieldBuilder';
+import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
 import SubmitButton from '../../../components/widgets/Button/Button';
 import {PASSWORD_RESET_FORM} from '../../../constants/formNames';
 import {normalizeLower} from '../../../helpers/normalize';

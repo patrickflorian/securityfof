@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const ThemeContext = React.createContext();
+export const ThemeContext :any = React.createContext<any>({});

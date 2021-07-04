@@ -3,8 +3,7 @@ import {View} from 'react-native';
 import {Chip, Menu, Text, useTheme} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
-import {Icon} from 'react-native-vector-icons/MaterialCommunityIcons';
-const LanguageComponent = (props) => {
+const LanguageComponent = (props : any) => {
   const {t, i18n} = useTranslation();
   const currentLanguage = i18n.language
   const [visible, setVisible] = useState(false);
