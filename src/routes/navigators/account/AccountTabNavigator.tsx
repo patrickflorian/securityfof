@@ -11,15 +11,15 @@ import {
   HomeTab,
   StatsTab,
   TransfertTab,
-} from '../../../screens/Accounts/SingleAccount/tabs';
+} from '@screens/Accounts/SingleAccount/tabs';
 /**
  * importer l'espace de nom  des routes
  */
-import routenames from '../..';
-import CustomTab from '../../../components/layouts/CustomTabBar/CustonTabBar';
+ import routenames from '@routes/index'
+import CustomTab from '@components/layouts/CustomTabBar/CustonTabBar';
 
 const Tab = createMaterialTopTabNavigator();
-const AccountTabNavigator = (props) => {
+const AccountTabNavigator = (props:any) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
     icon: {
@@ -31,7 +31,7 @@ const AccountTabNavigator = (props) => {
   });
   return (
     <Tab.Navigator
-      tabBar={(props) => <CustomTab {...props} />}
+      tabBar={(props: any) => <CustomTab {...props} />}
       initialRouteName={routenames.SIGN_IN}>
       <Tab.Screen
         name={routenames.SINGLE_ACCOUNT_HOME}

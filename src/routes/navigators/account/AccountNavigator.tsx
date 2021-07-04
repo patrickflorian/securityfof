@@ -12,13 +12,14 @@ import {AccountScreen, AccountFormScreen} from '../../../screens/Accounts';
 /**
  * importer l'espace de nom  des routes
  */
-import routenames from '../..';
+import routenames from '@routes/index'
 import AccountTabNavigator from './AccountTabNavigator';
 import AccountCategoriesScreen from '../../../screens/Accounts/AccountCategories/AccountCategories';
 
 const Stack = createStackNavigator();
 
-const Header = ({scene, previous, navigation}) => {
+const Header = (props: any) => {
+  const {scene, previous, navigation} = props;
   const {options} = scene.descriptor;
   const title =
     options.headerTitle !== undefined
