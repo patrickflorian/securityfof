@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 /**
  * importer les vues quiseront gerees par ce navigateur a savoir
  * !HomeScreen, IncomeScreen , OutcomeScreen, AccountScreen
@@ -14,14 +14,12 @@ import {BudgetScreen} from '@screens/Budget';
  */
 import routenames from '@routes/index'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import DrawerContent from '@components/layouts/drawercontent/DrawerContent';
 import HomeScreen from '@screens/HomeScreen/HomeScreen';
 import SuscriptionScreen from '@screens/SuscriptionScreen/SuscriptionScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 import OutcomeScreen from '@screens/Outcome/OutcomeScreen';
 
-const Drawer = createDrawerNavigator();
-
+const Tab = createBottomTabNavigator();
 export const screens = [
   {
     routename: routenames.HOME,
@@ -64,27 +62,23 @@ const HomeNavigator = () => {
   }, [hasSuscription]);
 
   return (
-    <Drawer.Navigator
-      initialRouteName={
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName={
         routenames.HOME
-      }
-      drawerContent={(props) => <DrawerContent {...props} />}
-      >
-      {screens.map((screen,index) => (
-        <Drawer.Screen
-          key={index}
-          name={screen.routename}
-          component={screen.component}
-          options={{
-            drawerIcon: ({color, size}) => (
-              <Icon name={screen.icon} style={{fontSize: size, color: color}} />
-            ),
-            drawerLabel: screen.label,
-          }}
-        />
-      ))}
-    </Drawer.Navigator>
-  );
+      }>
+        {
+          screens.map((screen,index) => (
+            <Tab.Screen name={screen.routename} key={index}  component={screen.component} options={{
+              tabBarIcon: ({focused, color, size}) => (
+                <Icon name={screen.icon} style={{fontSize: size, color: color}} />
+              ),
+              drawerLabel: screen.label,
+            }}/>
+          ))
+        }        
+      </Tab.Navigator>
+    </NavigationContainer>
+   );
 };
 
 export default HomeNavigator;

@@ -1,9 +1,0 @@
-{
-    "loginForm.username": "Nom d'utilisateur",
-    "loginForm.password": "Mot de passe",
-    "loginForm.create_one_account": "Créez un compte",
-    "loginForm.login": "Connexion",
-    "loginForm.sign_in": "Se connecter",
-    "loginForm.forgot_password": "Mot de passe oublié?",
-    "loginForm.dont_have_account": "Vous n'avez pas de compte ?"
-  }

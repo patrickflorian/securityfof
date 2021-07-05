@@ -2,19 +2,15 @@ import React, {Component, useEffect, useState} from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {ActivityIndicator, Surface} from 'react-native-paper';
-import LottieView from 'lottie-react-native';
 //import la liste des noms de routes
-import routenames from '../../routes';
+import routenames from '@routes/index';
 
 //composants personnalises
-import UserInfo from '../../components/layouts/settings/UserInfo';
-import Button from '../../components/widgets/Button/Button';
-import CardContainer from '../../components/layouts/settings/Preferences';
 import AsyncStorage from '@react-native-community/async-storage';
 /**
  * Importer les images necessaire : le logo
  */
-const logo = require('../../res/img/logo2.jpg');
+const logo = require('@res/img/logo2.jpg');
 const window = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
@@ -28,15 +24,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const fakeLoad = (cb) => {
-  setTimeout(cb, 300);
-};
-
 //Premiere interface representant le chargement de l'application
-const LoaderScreen = ({navigation}) => {
-  const [loading, setLoading] = useState(true);
-  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
-  const [isLogged, setLogged] = useState(null);
+const LoaderScreen = (props: any) => {
+  const {navigation} = props;
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isFirstLaunch, setIsFirstLaunch] = useState<boolean>();
+  const [isLogged, setLogged] = useState<boolean>();
   const theme = useTheme();
 
   useEffect(() => {
@@ -70,13 +63,6 @@ const LoaderScreen = ({navigation}) => {
   return (
     <Surface style={styles.container}>
       <Image source={logo} style={styles.image} />
-      {/* <LottieView
-      source={require('../../res/lotties/lf30_editor_pbtbvdgs.json')}
-      autoPlay
-      loop
-    /> */}{/* 
-    <Text>Safety</Text> */}{/* 
-    <Text>First Only Forever</Text> */}
       <ActivityIndicator color={theme.colors.primary} animating={true} />
     </Surface>
   );
