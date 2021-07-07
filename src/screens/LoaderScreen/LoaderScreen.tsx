@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: window.width * 0.5,
-    height: 0.5 * window.width * 0.5,
+    height: window.width * 0.5,
   },
 });
 

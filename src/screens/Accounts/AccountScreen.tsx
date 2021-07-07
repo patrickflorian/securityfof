@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 import {
   Appbar,
   Button,
@@ -15,30 +15,26 @@ import AccountFilter from '../../components/widgets/Filters/AccountFilter';
 
 import routenames from '../../routes';
 import AccountList from './components/AccountList';
+import { Paragraph, List, Avatar } from 'react-native-paper';
+import Animated from 'react-native-reanimated';
+import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: 8,
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    padding: 2,
   },
   card: {
-    width: '100%',
-    padding: 8,
-    elevation: 4,
-    borderStyle: 'solid',
-    borderRadius: 12,
-    borderWidth: 1,
-    marginTop: 5,
+    width: "40%",
+    height: 200,
+    marginVertical: 5,
   },
-  surface: {
-    padding: 8,
-    height: 'auto',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 4,
+  cardCover: {
+    height: 100
   },
 });
 
@@ -46,7 +42,7 @@ const AccountsBalance = () => {
   const theme = useTheme();
   const navigation = useNavigation();
   return (
-    <Card style={[styles.card, {borderColor: theme.colors.error}]}>
+    <Card style={[styles.card, { borderColor: theme.colors.error }]}>
       <Card.Title
         title="Solde total"
         right={() => (
@@ -64,7 +60,7 @@ const AccountsBalance = () => {
         <Text>60% utilisés</Text>
         <ProgressBar progress={0.6} color={theme.colors.error} />
       </Card.Content>
-      <Card.Actions style={{justifyContent: 'flex-end'}}>
+      <Card.Actions style={{ justifyContent: 'flex-end' }}>
         <Button
           icon="history"
           color={theme.colors.disabled}
@@ -86,24 +82,30 @@ const AccountsBalance = () => {
   );
 };
 
-const AccountScreen = ({navigation}) => {
-  //console.log(theme)
+const AccountScreen = (props: any) => {
+  const { navigation } = props;
   return (
     <>
-      <Appbar.Header style={{width: '100%'}}>
-        <Appbar.Action
-          icon="menu"
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        />
-        <Appbar.Content title="Comptes" />
-      </Appbar.Header>
-      <Surface style={styles.container}>
-        <AccountsBalance />
+      
+      <AppbarComponent/> 
+      <ScrollView >
+        <View style={styles.container}>
 
-        <AccountList />
-      </Surface>
+          <Animated.View style={styles.container}>
+            {
+              [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (<Card style={styles.card} key={item}>
+                <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
+                <Card.Content>
+                  <Paragraph>Documents de securité</Paragraph>
+                </Card.Content>
+                <Card.Actions>
+                  <Button icon='play' labelStyle={{ textTransform: 'none' }} >Lire</Button>
+                </Card.Actions>
+              </Card>))
+            }
+          </Animated.View>
+        </View>
+      </ScrollView>
     </>
   );
 };

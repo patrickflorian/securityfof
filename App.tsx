@@ -39,7 +39,7 @@
    colors: {
      ...PaperDefaultTheme.colors,
      ...NavigationDefaultTheme.colors,
-     primary: '#085394',
+     primary: '#E11700',
      secondary: '#F7BE31',
      default: '#1FADF4',
      success: '#6aa84f',
@@ -53,7 +53,7 @@
      ...NavigationDarkTheme.colors,
      ...PaperDarkTheme.colors,
      notification: Colors.red500,
-     primary: '#085394',
+     primary: '#E11700',
      secondary: '#F7BE31',
      default: '#1FADF4',
      success: '#6aa84f',

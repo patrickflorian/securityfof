@@ -18,6 +18,8 @@ import HomeScreen from '@screens/HomeScreen/HomeScreen';
 import SuscriptionScreen from '@screens/SuscriptionScreen/SuscriptionScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 import OutcomeScreen from '@screens/Outcome/OutcomeScreen';
+import Tabbar from '@components/widgets/TabBar/TabBar';
+import { useTheme } from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
 export const screens = [
@@ -28,26 +30,27 @@ export const screens = [
     label: 'Acceuil',
   },
   {
-    routename: routenames.ACCOUNT,
-    icon: 'briefcase-variant-outline',
-    component: AccountNavigator,
-    label: 'Comptes',
-  },
-  {
     routename: routenames.INCOME,
     icon: 'file-pdf-outline',
     component: IncomeScreen,
     label: 'Documents',
   },
   {
-    routename: routenames.OUTCOME,
-    icon: 'cash-minus',
-    component: OutcomeScreen,
+    routename: routenames.ACCOUNT,
+    icon: 'briefcase-variant-outline',
+    component: AccountNavigator,
     label: 'Formations',
+  },
+  {
+    routename: routenames.OUTCOME,
+    icon: 'account',
+    component: OutcomeScreen,
+    label: 'Moi',
   },
 ];
 const HomeNavigator = () => {
   const [hasSuscription, setSubscription] = useState<boolean>();
+  const theme = useTheme();
   useEffect(() => {
     if (hasSuscription === null) {
       AsyncStorage.getItem('hasSubscription').then((value) => {
@@ -62,14 +65,17 @@ const HomeNavigator = () => {
   }, [hasSuscription]);
 
   return (
-      <Tab.Navigator initialRouteName={
+      <Tab.Navigator 
+      initialRouteName={
         routenames.HOME
-      }>
+      }
+      //tabBar={(props)=><Tabbar {...props}/>}
+      >
         {
           screens.map((screen,index) => (
             <Tab.Screen name={screen.routename} key={index}  component={screen.component} options={{
               tabBarIcon: ({focused, color, size}) => (
-                <Icon name={screen.icon} style={{fontSize: size, color: color}} />
+                <Icon name={screen.icon} style={{fontSize: size, color: focused?theme.colors.primary: color}} />
               ),
               tabBarLabel: screen.label,
             }}/>
