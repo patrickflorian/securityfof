@@ -47,7 +47,7 @@ export const screens = [
   },
 ];
 const HomeNavigator = () => {
-  const [hasSuscription, setSubscription] = useState(null);
+  const [hasSuscription, setSubscription] = useState<boolean>();
   useEffect(() => {
     if (hasSuscription === null) {
       AsyncStorage.getItem('hasSubscription').then((value) => {
@@ -62,7 +62,6 @@ const HomeNavigator = () => {
   }, [hasSuscription]);
 
   return (
-    <NavigationContainer>
       <Tab.Navigator initialRouteName={
         routenames.HOME
       }>
@@ -72,12 +71,11 @@ const HomeNavigator = () => {
               tabBarIcon: ({focused, color, size}) => (
                 <Icon name={screen.icon} style={{fontSize: size, color: color}} />
               ),
-              drawerLabel: screen.label,
+              tabBarLabel: screen.label,
             }}/>
           ))
         }        
       </Tab.Navigator>
-    </NavigationContainer>
    );
 };
 

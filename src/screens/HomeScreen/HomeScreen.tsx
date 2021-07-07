@@ -17,13 +17,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Swiper from 'react-native-swiper';
 
 
-import DateInput from '../../components/widgets/DateInput/DateInput';
-import visa_black from '../../res/img/visa_black.png';
-import visa from '../../res/img/visa.png';
-import orangemoney from '../../res/img/om_black.png';
-import mtn from '../../res/img/mtn.jpg';
-import routenames from '../../routes';
-const TransactionList = (props) => {
+const TransactionList = (props: any) => {
   const transactions = [
     {
       id: 1,
@@ -55,12 +49,12 @@ const TransactionList = (props) => {
             key={account.id}
             title={account.libelle}
             description={account.type}
-            right={(color, style) => (
+            right={({color, style}) => (
               <Text style={{color: theme.colors.notification}}>
                 {account.solde}
               </Text>
             )}
-            left={(color, style) => (
+            left={({color, style}) => (
               <Avatar.Icon
                 icon="credit-card"
                 style={{...style, backgroundColor: 'transparent'}}
@@ -74,7 +68,8 @@ const TransactionList = (props) => {
   );
 };
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = (props: any) => {
+  const {navigation} = props;
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -107,12 +102,12 @@ const HomeScreen = ({navigation}) => {
       {/*       <Text>Home Screen</Text>
        */}
       <Appbar.Header style={{width: '100%'}}>
-        <Appbar.Action
+        {/* <Appbar.Action
           icon="menu"
           onPress={() => {
             navigation.openDrawer();
           }}
-        />
+        /> */}
         <Appbar.Content title="Welcome back" />
       </Appbar.Header> 
     </View>

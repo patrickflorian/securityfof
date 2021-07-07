@@ -78,7 +78,11 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
+    bundleAssetName: "index.android.bundle",
+    bundleInDebug: false,
     enableHermes: false,  // clean and rebuild if changing
+    jsBundleDirDebug: "$buildDir/intermediates/assets/debug",
+    jsBundleDirRelease: "$buildDir/intermediates/assets/release",
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -152,6 +156,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('release.keystore')
+            storePassword 'password'
+            keyAlias 'release'
+            keyPassword 'password'
+        }
     }
     buildTypes {
         debug {
@@ -160,7 +170,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
