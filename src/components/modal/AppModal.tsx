@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Modal, Portal, Text, Button, Provider, Avatar } from 'react-native-paper';
-import { useTheme } from '@react-navigation/native';
+import { useTheme } from 'react-native-paper';
 
 
 const AppModalButton = (props: any) => {
@@ -11,24 +11,19 @@ const AppModalButton = (props: any) => {
   const hideModal = () => setVisible(false);
   const styles = StyleSheet.create({
     container:{
-      //flex: 1,
-      //alignItems: "center",
-      //justifyContent: 'center',
-      //alignContent: "center",
-      //alignSelf: 'stretch',
+      
     },
     contentContainerStyle: {
-      flex: 0.6,
+      flex: 0.7,
       alignContent: "flex-start",
       alignItems: 'center',
       justifyContent: 'flex-start',
       alignSelf: "center",
-      backgroundColor: theme.colors.background,
-      padding: 20,
+      backgroundColor: theme.colors.surface,
+      padding: 5,
       width : 240,
       borderRadius: 5
     },
-  
   });
 
   return (
