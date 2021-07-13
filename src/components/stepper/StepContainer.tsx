@@ -67,12 +67,12 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
         return this.state.step === 0;
     }
 
-    previousStep(e: any) {
+    previousStep() {
         this.setState((state) => { return { ...state, step: state.step - 1 } });
         //this.props?.setStep(this.props.currentStep?this.props.currentStep - 1:0)
     }
 
-    nextStep(e: any) {
+    nextStep() {
         this.setState((state) => { return { ...state, step: state.step + 1 } });
         //this.props?.setStep(this.props.currentStep?this.props.currentStep - 1:0)
     }
@@ -140,8 +140,8 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                         (step === index) && <View key={index}>{child}</View>)}
                 </ScrollView>
                 <View  style={styles.navigationButtonContainer}>
-                        {/* !this.isFirstStep() && */ <IconButton icon='arrow-left' disabled={this.isFirstStep()} onPress={this.previousStep} ></IconButton>}
-                        {/* !this.isLastStep() &&  */<IconButton icon='arrow-right' disabled={this.isLastStep()} onPress={this.nextStep}></IconButton>}
+                        {/* !this.isFirstStep() && */ <Button icon='arrow-left' disabled={this.isFirstStep()} onPress={()=>this.previousStep()} >Prev</Button>}
+                        {/* !this.isLastStep() &&  */<Button icon='arrow-right'contentStyle={{flexDirection: 'row-reverse'}} disabled={this.isLastStep()} onPress={()=>this.nextStep()}>Next</Button>}
                 </View>
             </View>
         );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
-import AppModalButton from '@components/modal/AppModal';
+import AppModalButton from '@components/modal/AppBarModalButton';
 import { Text, TouchableRipple, Switch, List, Divider } from 'react-native-paper';
 import { ThemeContext } from '@context/context';
 import {
