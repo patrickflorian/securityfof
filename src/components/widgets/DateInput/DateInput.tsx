@@ -8,8 +8,8 @@
  * @param
  */
 
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import {
   Avatar,
   IconButton,
@@ -18,12 +18,11 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import Button from '../Button/Button';
+import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 /**
  * Custom date input component
  */
-const DateInput = (props) => {
+const DateInput = (props: any) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -37,16 +36,17 @@ const DateInput = (props) => {
       alignSelf: 'center',
     },
     input: {
-      marginTop: 2,
+      //marginTop: 2,
       height: 25,
     },
   });
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: Event, selectedDate?: Date) => {
+    if (event.type === "set") console.log("value:" , selectedDate);
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
-  const {icon} = props;
+  const { icon } = props;
   return (
     <View
       style={{
@@ -54,13 +54,18 @@ const DateInput = (props) => {
         justifyContent: 'flex-end',
         alignItems: 'center',
       }}>
-      <TextInput
-        mode="outlined"
-        value={date.toLocaleDateString()}
-        style={styles.input}
-        icon="date"
-        {...props}
-      />
+      <TouchableOpacity
+        onPress={() => {setShow(true); console.log('press')} }>
+        <TextInput
+          mode="outlined"
+          value={date.toLocaleDateString()}
+          style={styles.input}
+          icon="calendar"
+          {...props}
+          disabled
+        />
+      </TouchableOpacity>
+
       <IconButton
         icon="calendar"
         style={styles.icon}

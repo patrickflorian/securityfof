@@ -1,4 +1,5 @@
 import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent';
+import FormWithStep from '@screens/FormWithStep';
 import React, {useState} from 'react';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import {
@@ -39,6 +40,7 @@ const HomeScreen = (props: any) => {
 
       <View style={styles.cardContainer}>
         <DirectorMessageCard/>
+        <FormWithStep/>
       </View>
     </View>
   );

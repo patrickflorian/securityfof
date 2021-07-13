@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormikConfig, FormikValues, Field, FormikProps, FieldInputProps, FormikHelpers } from 'formik';
-
+import {  FormikValues, FormikProps, FieldInputProps, FormikHelpers } from 'formik';
+import {Field} from 'redux-form';
 /**
  * @interface StepProps Proprietes pour les step 
  * @param validationSchema utiliser pour la validation des champs d'une etape avant de passer a la suivante , elle utilise les schemas de validation fournies par yup
@@ -10,7 +10,7 @@ import { FormikConfig, FormikValues, Field, FormikProps, FieldInputProps, Formik
  * @param title le titre qui sera utilisé pour l'etape
  * @param onNextStep si cette fonction est definie alors elle sera utilisée pour gerer le passage a l'etape suivant 
  */
-export interface StepProps extends Pick<FormikConfig<FormikValues>,/*  "onSubmit" | */ "children" | "onReset"> {
+export interface StepProps{
     validationSchema?: any;
     Component?: React.ElementType<StepComponentProps>;
     form?: any;
