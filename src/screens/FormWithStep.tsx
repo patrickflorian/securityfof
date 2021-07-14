@@ -15,13 +15,8 @@ class FormWithStep extends React.Component<any, FormWithStepState>{
         this.state = {
             currentStep: 0,
         }
-
-        this.setStep = this.setStep.bind(this);
     }
 
-    setStep(step: number) {
-        this.setState((state) => ({ ...state, currentStep: step }));
-    }
 
     render() {
 

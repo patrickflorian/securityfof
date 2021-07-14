@@ -34,23 +34,15 @@ const AppbarComponent = (props: any) => {
     },
     preference: {
       width: '100%',
-<<<<<<< HEAD
-      height:'80%',
-=======
       //height:'80%',
->>>>>>> a2e09a7f1d018a94c45cadb2e22debb416ad9e48
     },
   });
   return (
     <Appbar.Header style={{ width: '100%' }} theme={{ ...theme, colors: { ...theme.colors, primary: theme.colors.background } }} >
       <Appbar.Content title="Welcome back" subtitle={"To Secutity FOF"} />
       <AppModalButton>
-<<<<<<< HEAD
-        <View style={{ width: '100%' }}>
-=======
 
         <View style={styles.preference}>
->>>>>>> a2e09a7f1d018a94c45cadb2e22debb416ad9e48
           <List.Item
             title="John Doe"
             description="technician"
@@ -60,12 +52,6 @@ const AppbarComponent = (props: any) => {
             style={{ alignItems: "center", alignContent: 'center', justifyContent: 'center' }}
           />
           <Divider />
-<<<<<<< HEAD
-        </View>
-
-        <View style={styles.preference}>
-=======
->>>>>>> a2e09a7f1d018a94c45cadb2e22debb416ad9e48
           <List.Item
             title="Mes documents"
             left={props => <List.Icon {...props} icon='file-pdf-outline' />}
@@ -79,28 +65,16 @@ const AppbarComponent = (props: any) => {
             title="Dark Theme"
             right={props => <Switch value={theme.dark} pointerEvents="none" color={theme.colors.primary} onValueChange={(value) => toggleTheme()} />}
           />
-<<<<<<< HEAD
-          <View style={{ bottom:0, left:0, width: '100%', position: 'absolute'}}>
-=======
           <View /* style={{ bottom:0, left:0, width: '100%', position: 'absolute'}} */>
->>>>>>> a2e09a7f1d018a94c45cadb2e22debb416ad9e48
             <Divider />
             <List.Item
               title="Deconnexion"
               right={props => <List.Icon {...props} icon='logout-variant' />}
-<<<<<<< HEAD
-              //style={{bottom:0, left:0, width: '100%', position: 'absolute'}}
-            />
-          </View>
-        </View>
-          
-=======
             //style={{bottom:0, left:0, width: '100%', position: 'absolute'}}
             />
           </View>
         </View>
 
->>>>>>> a2e09a7f1d018a94c45cadb2e22debb416ad9e48
       </AppModalButton>
     </Appbar.Header>
   );

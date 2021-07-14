@@ -7,7 +7,7 @@ interface FormModalButtonProps{
     title: string;
     icon: string;
     style: any;
-    children: any;
+    children?: any;
 }
 
 const FormModalButton = (props: FormModalButtonProps) => {
@@ -30,6 +30,18 @@ const FormModalButton = (props: FormModalButtonProps) => {
       width : 240,
       borderRadius: 5
     },
+    fullscreen:{
+      flex:1,
+      alignContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: "center",
+      backgroundColor: theme.colors.surface,
+      padding: 5,
+      width : "100%",
+      height : "100%",
+      top:-10,
+    }
   });
 
   const {title, ...rest} = props;
@@ -39,7 +51,7 @@ const FormModalButton = (props: FormModalButtonProps) => {
         <Modal
           visible={visible}
           onDismiss={hideModal}
-          contentContainerStyle={styles.contentContainerStyle}
+          contentContainerStyle={styles.fullscreen}
           theme={{ roundness: 50 }}>
           {props.children}
         </Modal>

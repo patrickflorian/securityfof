@@ -40,7 +40,6 @@ const HomeScreen = (props: any) => {
 
       <View style={styles.cardContainer}>
         <DirectorMessageCard/>
-        <FormWithStep/>
       </View>
     </View>
   );

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { View, Text, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
-import {Field, reduxForm, SubmissionError} from 'redux-form';
-import * as Yup from 'yup';
-import { useTranslation} from 'react-i18next';
-import {ACCOUNT_FORM} from '../../constants/formNames';
-import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
-import FormStepContainer  from '@components/stepper/StepContainer';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { useTranslation } from 'react-i18next';
+import { DOCUMENT_FORM } from '@constants/formNames';
+import { renderField } from '@components/widgets/FormBuilder/FieldBuilder';
+import FormStepContainer from '@components/stepper/StepContainer';
 import { FormStep, StepComponentProps } from '@components/stepper/Step';
 
 /**
@@ -32,7 +31,7 @@ const maxLength15 = maxLength(15);
  * @param {*} props
  */
 const FormComponent = (props: StepComponentProps) => {
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   //const {submitting} = props;
 
   const theme = useTheme();
@@ -53,7 +52,6 @@ const FormComponent = (props: StepComponentProps) => {
       style={{
         //flex: 1,
         flexDirection: 'column',
-        margin: 40,
         justifyContent: 'center',
       }}>
       {/*<Headline style={{marginVertical: 20, alignSelf: 'center'}}>
@@ -76,10 +74,32 @@ const FormComponent = (props: StepComponentProps) => {
           <TextInput.Icon
             name="alpha-l-box-outline"
             color={theme.colors.disabled}
-            onPress={() => {}}
+            onPress={() => { }}
           />
         }
       />
+       <Field
+        //autoFocus
+        name={'libelle'}
+        type="text"
+        keyboardType="default"
+        label={'libelle'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required, maxLength15]}
+        right={
+          <TextInput.Icon
+            name="alpha-l-box-outline"
+            color={theme.colors.disabled}
+            onPress={() => { }}
+          />
+        }
+      />
+      
       <Field
         //autoFocus
         name={'account_type'}
@@ -94,13 +114,13 @@ const FormComponent = (props: StepComponentProps) => {
           backgroundColor: theme.colors.surface,
         }}
         validate={[required, maxLength15]}
-        /* right={
-          <TextInput.Icon
-            name="email-outline"
-            color={theme.colors.disabled}
-            onPress={() => {}}
-          />
-        } */
+      /* right={
+        <TextInput.Icon
+          name="email-outline"
+          color={theme.colors.disabled}
+          onPress={() => {}}
+        />
+      } */
       />
       <Field
         //autoFocus
@@ -119,7 +139,7 @@ const FormComponent = (props: StepComponentProps) => {
           <TextInput.Icon
             name="numeric"
             color={theme.colors.disabled}
-            onPress={() => {}}
+            onPress={() => { }}
           />
         }
       />
@@ -138,7 +158,7 @@ const FormComponent = (props: StepComponentProps) => {
           <TextInput.Icon
             name="alpha-s-circle-outline"
             color={theme.colors.disabled}
-            onPress={() => {}}
+            onPress={() => { }}
           />
         }
       />
@@ -159,26 +179,50 @@ const FormComponent = (props: StepComponentProps) => {
           <TextInput.Icon
             name="lock-outline"
             color={theme.colors.disabled}
-            onPress={() => {}}
+            onPress={() => { }}
           />
         }
       />
-      {/* <SubmitButton
-        type="primary"
-        filled
-        onPress={props.handleSubmit}
-        disabled={submitting}>
-        {'Creer '}
-        <Icon name="briefcase-plus-outline" size={15} />
-      </SubmitButton> */}
     </View>
   );
 };
 
-export const AccountFormScreen = (props: any) => {
-  const navigation = useNavigation();
+export const DocumentFormComponent = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   const [currentStep, setCurrentStep] = useState<number>(1);
+  const { navigation } = props;
+  const [text, setText] = React.useState('');
+  const hasUnsavedChanges = true//Boolean(text);
+
+  React.useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e: any) => {
+        if (!hasUnsavedChanges) {
+          // If we don't have unsaved changes, then we don't need to do anything
+          return;
+        }
+
+        // Prevent default behavior of leaving the screen
+        e.preventDefault();
+
+        // Prompt the user before leaving the screen
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            { text: "Don't leave", style: 'cancel', onPress: () => { } },
+            {
+              text: 'Discard',
+              style: 'destructive',
+              // If the user confirmed, then we dispatch the action we blocked earlier
+              // This will continue the action that had triggered the removal of the screen
+              onPress: () => navigation.dispatch(e.data.action),
+            },
+          ]
+        );
+      }),
+    [navigation, hasUnsavedChanges]
+  );
   const onSubmit = (values: any) => {
     return sleep(2000).then(() => {
       // simulate server latency
@@ -198,17 +242,17 @@ export const AccountFormScreen = (props: any) => {
       }
     });
   };
-  return( <React.Fragment>
+  return (<React.Fragment>
     <FormStepContainer >
-      <FormStep name='time' title='date' Component={(props) => <FormComponent {...props} />} />
-      <FormStep 
-        name="date" 
+      <FormStep name='time' title='date' Component={(props) => <Text>Bonjour dechet</Text>} />
+      <FormStep
+        name="date"
         title="Date"
-        Component={(props)=><FormComponent {...props} />}
+        Component={(props) => <FormComponent {...props} />}
       >
       </FormStep>
     </FormStepContainer>
   </React.Fragment>);
 };
 
-export default AccountFormScreen;
+export default DocumentFormComponent;

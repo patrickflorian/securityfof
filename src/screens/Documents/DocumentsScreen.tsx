@@ -6,6 +6,8 @@ import Animated from 'react-native-reanimated';
 import routenames from '@routes/index'
 import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent';
 import { useNavigation } from '@react-navigation/native';
+import FormModalButton from '@components/modal/FormModalButton';
+import DocumentFormComponent from './components/forms/DocumentForm';
 const styles = StyleSheet.create({
   container: {
     marginTop: 15,
@@ -29,7 +31,6 @@ const DocumentsScreen = (props: any) => {
   const navigation = useNavigation();
   return (
     <>
-
       <AppbarComponent />
       <ScrollView >
         <View style={styles.container}>
@@ -39,9 +40,14 @@ const DocumentsScreen = (props: any) => {
               <Paragraph>Documents de securité</Paragraph>
             </Card.Content>
             <Card.Actions>
+              {/* <FormModalButton icon="plus" style={{}} title="Nouveau">
+                <DocumentFormComponent/>
+              </FormModalButton> */}
               <Button onPress={
-                () => navigation.navigate(routenames.DOCUMENT_FORM)}
-              >Nouveau</Button>
+                () =>{ 
+                  navigation.setOptions({tabBarVisible: false}) ;
+                  navigation.navigate(routenames.DOCUMENT_FORM)
+                }}>Nouveau</Button>
             </Card.Actions>
           </Card>
           <Card style={styles.card} >

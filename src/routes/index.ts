@@ -17,6 +17,7 @@ const DOCUMENT_FORM = 'DocumentsForm';
 const DOCUMENT_HOME = 'DocumentsHome';
 const INCOME = 'Income';
 const OUTCOME = 'Outcome';
+const MODAL = 'modal';
 const BUDGET = 'Budget';
 const SINGLE_ACCOUNT = 'SingleAccount';
 const SINGLE_ACCOUNT_HOME = 'SingleAccountHome';
@@ -25,6 +26,7 @@ const SINGLE_ACCOUNT_TRANSFERT = 'SingleAccountTransfert';
 const SINGLE_ACCOUNT_STATS = 'SingleAccountStats';
 const DRAWER = 'Drawer';
 const SUSCRIPTION = 'Suscription';
+const NOTABBAR = 'noTabBar';
 /**
  * Les constantes repressentants les NAvigateurs
  */
@@ -44,7 +46,9 @@ const routenames = {
   INCOME,
   HOME,
   LOADER,
+  NOTABBAR,
   LOGIN,
+  MODAL,
   ONBOARDING,
   OUTCOME,
   PASSWORD_RESET,
