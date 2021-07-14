@@ -6,8 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
  * !HomeScreen, IncomeScreen , OutcomeScreen, AccountScreen
  */
 import {AccountNavigator} from '../account';
-import {IncomeScreen} from '@screens/Income';
-import {BudgetScreen} from '@screens/Budget';
+import {DocumentNavigator} from '../documents';
 
 /**
  * importer l'espace de nom  des routes
@@ -17,7 +16,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '@screens/HomeScreen/HomeScreen';
 import SuscriptionScreen from '@screens/SuscriptionScreen/SuscriptionScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import OutcomeScreen from '@screens/Outcome/OutcomeScreen';
+import OutcomeScreen from '@screens/UserAccount/UserAccountScreen';
 import Tabbar from '@components/widgets/TabBar/TabBar';
 import { useTheme } from 'react-native-paper';
 
@@ -30,9 +29,9 @@ export const screens = [
     label: 'Acceuil',
   },
   {
-    routename: routenames.INCOME,
+    routename: routenames.DOCUMENT,
     icon: 'file-pdf-outline',
-    component: IncomeScreen,
+    component: DocumentNavigator,
     label: 'Documents',
   },
   {

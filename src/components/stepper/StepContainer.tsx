@@ -1,10 +1,10 @@
 import React, { Component, useState } from 'react';
-import { Formik, FormikConfig, FormikHelpers, FormikValues, useFormik } from 'formik';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { FormikHelpers } from 'formik';
+import { reduxForm, SubmissionError } from 'redux-form';
 import { StepProps } from './Step';
 import { View, ScrollView } from 'react-native';
 import { DOCUMENT_FORM } from '@constants/formNames';
-import { Button, IconButton } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
 /**

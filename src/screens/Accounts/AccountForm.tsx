@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Alert, Text, View} from 'react-native';
 import {CommonActions, useNavigation} from '@react-navigation/native';
 import {
@@ -9,23 +9,27 @@ import {
   useTheme,
 } from 'react-native-paper';
 import {Field, reduxForm, SubmissionError} from 'redux-form';
+import * as Yup from 'yup';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Trans, useTranslation} from 'react-i18next';
 import {ACCOUNT_FORM, LOGIN_FORM} from '../../constants/formNames';
 import SubmitButton from '../../components/widgets/Button/Button';
 import {renderField} from '../../components/widgets/FormBuilder/FieldBuilder';
 import routenames from '../../routes';
+import { FormStepContainer } from '@components/stepper/StepContainer';
+import { FormStep, StepComponentProps } from '@components/stepper/Step';
+
 /**
  *
  * @param {*} value
  */
-const required = (value) =>
+const required = (value: any) =>
   value || typeof value === 'number' ? undefined : 'Required';
 /**
  *
  * @param {*} max
  */
-const maxLength = (max) => (value) =>
+const maxLength = (max: number) => (value: any) =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const maxLength15 = maxLength(15);
 
@@ -33,10 +37,9 @@ const maxLength15 = maxLength(15);
  *
  * @param {*} props
  */
-const FormComponent = (props) => {
+const FormComponent = (props: StepComponentProps) => {
   const {t, i18n} = useTranslation();
-  const {submitting} = props;
-  const navigation = useNavigation();
+  //const {submitting} = props;
 
   const theme = useTheme();
 
@@ -68,7 +71,6 @@ const FormComponent = (props) => {
         type="text"
         keyboardType="default"
         label={'libelle'}
-        right={() => <Icon name="account" size={60} />}
         component={renderField}
         //normalize={normalizeLower}
         style={{
@@ -91,7 +93,6 @@ const FormComponent = (props) => {
         items={accounts_categories}
         keyboardType="default"
         label={'Type de compte'}
-        right={() => <Icon name="account" size={60} />}
         component={renderField}
         //normalize={normalizeLower}
         style={{
@@ -113,7 +114,6 @@ const FormComponent = (props) => {
         type="text"
         keyboardType="default"
         label={'Numero de compte'}
-        right={() => <Icon name="account" size={60} />}
         component={renderField}
         //normalize={normalizeLower}
         style={{
@@ -131,7 +131,6 @@ const FormComponent = (props) => {
       />
       <Field
         name="account_solde"
-        keyboardType="number"
         label={'Solde'}
         component={renderField}
         keyboardType={'number-pad'}
@@ -155,7 +154,6 @@ const FormComponent = (props) => {
         type="text"
         keyboardType={'number-pad'}
         label={'Seuil'}
-        right={() => <Icon name="account" size={60} />}
         component={renderField}
         //normalize={normalizeLower}
         style={{
@@ -171,14 +169,14 @@ const FormComponent = (props) => {
           />
         }
       />
-      <SubmitButton
+      {/* <SubmitButton
         type="primary"
         filled
         onPress={props.handleSubmit}
         disabled={submitting}>
         {'Creer '}
         <Icon name="briefcase-plus-outline" size={15} />
-      </SubmitButton>
+      </SubmitButton> */}
     </View>
   );
 };
@@ -189,10 +187,11 @@ const AccountFormComponent = reduxForm({
   //onSubmit:onSubmit,
 })(FormComponent);
 
-export const AccountFormScreen = (props) => {
+export const AccountFormScreen = (props: any) => {
   const navigation = useNavigation();
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const onSubmit = (values) => {
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const onSubmit = (values: any) => {
     return sleep(2000).then(() => {
       // simulate server latency
       if (!values.username) {
@@ -211,7 +210,30 @@ export const AccountFormScreen = (props) => {
       }
     });
   };
-  return <AccountFormComponent onSubmit={onSubmit} />;
+  return <React.Fragment>
+    <FormStepContainer 
+    name="form-docs" 
+    currentStep={currentStep} 
+    initialValues={{date:''}}
+    onSubmit={(values, helpers)=>{
+      console.log('submitted');
+      return new Promise((resolve)=>{})
+    }}
+    setStep={setCurrentStep}
+    >
+      <FormStep 
+        name="date" 
+        title="Date"
+        validationSchema={Yup.object().shape({
+          date: Yup.string()
+        })}
+        Component={(props)=><FormComponent {...props} />}
+      >
+      </FormStep>
+    </FormStepContainer>
+  
+
+  </React.Fragment>;
 };
 
 export default AccountFormScreen;

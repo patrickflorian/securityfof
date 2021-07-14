@@ -11,17 +11,22 @@ const AppModalButton = (props: any) => {
   const hideModal = () => setVisible(false);
   const styles = StyleSheet.create({
     container:{
-      
+      alignContent: "flex-start",
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
     },
     contentContainerStyle: {
-      flex: 0.7,
+      //flex: 0.7,
       alignContent: "flex-start",
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'flex-start',
       alignSelf: "center",
+      position: "absolute",
+      top: 30,
       backgroundColor: theme.colors.surface,
       padding: 5,
-      width : 240,
+      minWidth : 280,
+      width: '85%',
       borderRadius: 5
     },
   });

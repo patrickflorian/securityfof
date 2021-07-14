@@ -1,4 +1,3 @@
-import {roundToNearestPixel} from 'react-native/Libraries/Utilities/PixelRatio';
 
 /**
  * Les constantes represeentants les screen
@@ -13,6 +12,9 @@ const ACCOUNT = 'Account';
 const ACCOUNT_CATEGORIES = 'AccountCategories';
 const ACCOUNT_FORM = 'AccountForm';
 const ACCOUNT_HOME = 'AccountHome';
+const DOCUMENT = 'Documents';
+const DOCUMENT_FORM = 'DocumentsForm';
+const DOCUMENT_HOME = 'DocumentsHome';
 const INCOME = 'Income';
 const OUTCOME = 'Outcome';
 const BUDGET = 'Budget';
@@ -36,6 +38,9 @@ const routenames = {
   ACCOUNT_FORM,
   BUDGET,
   DRAWER,
+  DOCUMENT,
+  DOCUMENT_FORM,
+  DOCUMENT_HOME,
   INCOME,
   HOME,
   LOADER,
