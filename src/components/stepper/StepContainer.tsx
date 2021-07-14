@@ -1,8 +1,11 @@
-import React, {Component, useState} from 'react';
-import {Form, Formik, FormikConfig, FormikHelpers, FormikValues} from 'formik';
-import {StepProps} from './Step';
-import classNames from 'classnames';
-import set = Reflect.set;
+import React, { Component, useState } from 'react';
+import { FormikHelpers } from 'formik';
+import { reduxForm, SubmissionError } from 'redux-form';
+import { StepProps } from './Step';
+import { View, ScrollView, Dimensions, StatusBar } from 'react-native';
+import { DOCUMENT_FORM } from '@constants/formNames';
+import { Button, Text } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
 /**
  * @interface StepContainerProps
@@ -13,20 +16,21 @@ import set = Reflect.set;
  * @param setStep cette fontion doit etre utilisée pour modifier l'etape courante
  * @param onSubmit  cette fonction est executée une fois que les differentes etapes on été validée
  */
-export interface StepContainerProps extends Pick<FormikConfig<FormikValues>, "onSubmit" | "children" | "onReset" | "initialValues"> {
+export interface StepContainerProps {
     Wrapper?: React.ElementType;
-    currentStep: number;
-    setStep: any;
-    onSubmit: (values: any, helpers: FormikHelpers<any>) => Promise<any>;
-    name: string;
+    currentStep?: number;
+    setStep?: any;
+    onSubmit?: (values: any, helpers: FormikHelpers<any>) => Promise<any>;
+    name?: string;
     loading?: boolean;
 }
 
 export interface StepContainerState {
     completed: boolean;
     switchState: boolean;
-    loading: boolean;
-    //step: number
+    loading?: boolean;
+    step: number;
+    //height: number;
     //childrenArray: React.ReactElement<| StepProps>[];
 }
 
@@ -37,119 +41,124 @@ export interface StepContainerState {
  * @link       http://github.com/patrickflorian
  * @author     NOUMBISSI MALANOU Patrick Florian <noumbissipatrick@gmail.com>
  */
-export class FormStepContainer extends Component<StepContainerProps, StepContainerState> {
+class FormComponent extends Component<StepContainerProps, StepContainerState> {
 
     childrenArray: React.ReactElement<| StepProps>[];
-
+    height = 0;
     constructor(props: StepContainerProps) {
         super(props);
         this.state = {
             completed: false,
             switchState: false,
             loading: props.loading,
-            //step: props.currentStep|0,
+            step: props.currentStep | 0,
         };
         this.childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<| StepProps>[];
         this.isLastStep = this.isLastStep.bind(this);
         this.isFirstStep = this.isFirstStep.bind(this);
         this.previousStep = this.previousStep.bind(this);
+        this.nextStep = this.nextStep.bind(this);
     }
 
     isLastStep() {
-        return this.props.currentStep === this.childrenArray.length - 1;
+        return this.state.step === this.childrenArray.length - 1;
     }
 
     isFirstStep() {
-        return this.props.currentStep === 0;
+        return this.state.step === 0;
     }
 
-    previousStep(e: any) {
-        //this.setState((state) => { return { ...state, step: state.step - 1 } });
-        this.props.setStep(this.props.currentStep - 1)
+    previousStep() {
+        this.setState((state) => { return { ...state, step: state.step - 1 } });
+        //this.props?.setStep(this.props.currentStep?this.props.currentStep - 1:0)
+    }
+
+    nextStep() {
+        this.setState((state) => { return { ...state, step: state.step + 1 } });
+        //this.props?.setStep(this.props.currentStep?this.props.currentStep - 1:0)
     }
 
     componentDidUpdate(prevProps: Readonly<StepContainerProps>, prevState: Readonly<StepContainerState>, snapshot?: any): void {
-       if(prevProps.loading!==this.props.loading) this.setState((state)=>{
+        if (prevProps.loading !== this.props.loading) this.setState((state) => {
             return {
                 ...state,
                 loading: this.props.loading
             }
         })
     }
-
-    render() {
-
-        const {children, currentStep = 0, Wrapper, onSubmit, onReset, setStep, ...rest} = this.props;
+    onSubmit(values: any, helpers: any) {
+        const { currentStep = 0, onSubmit, setStep } = this.props;
         //const { step } = this.state;
-
         const currentChild = this.childrenArray[currentStep];
-        return (
-            <Formik
-                {...rest}
-                validationSchema={currentChild.props.validationSchema && currentChild.props.validationSchema}
-                onSubmit={(values, helpers) => {
-                    if (this.isLastStep()) {
-                        this.setState((state) => {
-                            return {...state, loading: true}
-                        });
-                        currentChild.props.onNextStep ? currentChild.props.onNextStep(values, helpers)
-                            : onSubmit(values, helpers).then(value => {
-                                this.setState({...this.state, completed: true, loading: false});
-                            }).catch(e => {
-                                this.setState({...this.state, loading: false});
-                            });
-                    } else {
-                        currentChild.props.onNextStep ? currentChild.props.onNextStep(values, helpers) : setStep(currentStep + 1);
-                    }
-                    helpers.setSubmitting(false);
-                }}
-            >
-                {(props) => {
-                    return (
-                        <div className={classNames(["divLoader", this.state.loading && 'loading'])}>
-                            <Form autoComplete="off" onSubmit={(e) => props.handleSubmit(e)}
-                                  onReset={(e) => props.handleReset(e)}
-                                  className="step-form">
+        if (this.isLastStep()) {
+            this.setState((state) => {
+                return { ...state, loading: true }
+            });
+            currentChild.props.onNextStep ? currentChild.props.onNextStep(values, helpers)
+                : onSubmit && onSubmit(values, helpers).then(value => {
+                    this.setState({ ...this.state, completed: true, loading: false });
+                }).catch(e => {
+                    this.setState({ ...this.state, loading: false });
+                });
+        } else {
+            currentChild.props.onNextStep ? currentChild.props.onNextStep(values, helpers) : setStep(currentStep + 1);
+        }
+        helpers.setSubmitting(false);
+    }
+    render() {
+        const STATUS_BAR = StatusBar.currentHeight || 24; 
+        const WHeight = Dimensions.get("screen").height;
+        const styles = StyleSheet.create({
+            container: {
+                flex:1,
+                justifyContent: 'flex-end',
+                alignContent: 'center',
+                alignItems: 'flex-end',
+                alignSelf: 'stretch',
+            },
+            navigationButtonContainer: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%',/* 
+                marginTop: 10,*/
+                marginBottom: 5, 
+                alignSelf: 'flex-end',
+                height: 50,
+            },
+            contentContainer:{
+                height: WHeight-45-STATUS_BAR*4,
+                width:"100%",
+                alignSelf:'stretch',
+                alignContent: 'center',
+                justifyContent: 'center',
+                alignItems:'center',
+            },
 
-                                {Wrapper ? <Wrapper>{this.childrenArray[currentStep]}</Wrapper>
-                                    : <div className='step-form-content'>
-                                        <div className="divModalLoader"/>
-                                        {this.childrenArray.map((child, index) =>
-                                            (currentStep === index) &&<div key={index}
-                                                 className={classNames(['form-slide ', (currentStep !== index) && 'form-slide-hide', (currentStep === index) && 'form-slide-show',])}>{child}</div>)}
-                                    </div>}
-                                <div className="row submit-block ml-2">
-                                    <div className=" col-xs-12">
-                                        <div className="">
-                                            {currentStep == 0 ? <a
-                                                className="btn btn-outline-warning rounded-pill mb-3" href="#">
-                                                Retourner à la page d'accueil
-                                            </a> : <a
-                                                className="btn btn-outline-warning rounded-pill mb-3" href="#"
-                                                onClick={this.previousStep}>
-                                                Precedent
-                                            </a>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-2 col-xs-12">
-                                        <div className="">
-                                            <div className="form-group">
-                                                <input
-                                                    type='submit'
-                                                    className="btn btn-primary rounded-pill "
-                                                    itemProp="url"
-                                                    value={this.isLastStep() ? 'Terminer' : 'Poursuivre'}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Form>
-                        </div>
-                    );
-                }}
-            </Formik>
+        })
+        const { children, Wrapper, onSubmit, setStep, ...rest } = this.props;
+        const { step } = this.state;
+        const currentChild = this.childrenArray[step];
+        return (
+            <View style={styles.container} >
+
+                <View  style={styles.contentContainer}>
+                    <ScrollView>
+                        {this.childrenArray.map((child: any, index: number) =>
+                                <View key={index} style={{display:(step === index)?"flex":"none"}}>{child}</View>)}
+                    </ScrollView>
+                </View>
+            
+                <View style={styles.navigationButtonContainer}>
+                    {/* !this.isFirstStep() && */ <Button icon='arrow-left' disabled={this.isFirstStep()} onPress={() => this.previousStep()} >Prev</Button>}
+                    {/* !this.isLastStep() &&  */<Button icon='arrow-right' contentStyle={{ flexDirection: 'row-reverse' }} disabled={this.isLastStep()} onPress={() => this.nextStep()}>Next</Button>}
+                </View>
+            </View>
         );
     }
 
 }
+;
+
+const StepFormContainer = reduxForm({ form: DOCUMENT_FORM })(FormComponent)
+export default StepFormContainer;

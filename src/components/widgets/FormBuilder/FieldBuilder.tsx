@@ -7,7 +7,7 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
   const {touched, error, warning, asyncValidating} = meta;
   const theme = useTheme();
 
-  const renderInput =(type)=>{
+  const renderInput =(type: string)=>{
     let inputComponent;
     switch (type) {
             case 'select':
@@ -47,10 +47,10 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
       {touched &&
         ((error && <HelperText type={'error'}>{error}</HelperText>) ||
           (warning && (
-            <TexHelperTextt style={{color: 'orange'}}>{warning}</TexHelperTextt>
+            <HelperText type="info" style={{color: 'orange'}}>{warning}</HelperText>
           )) ||
           (asyncValidating && (
-            <HelperText style={{color: 'orange'}}>Validating...</HelperText>
+            <HelperText  type="info" style={{color: 'orange'}}>Validating...</HelperText>
           )))}
     </View>
   );

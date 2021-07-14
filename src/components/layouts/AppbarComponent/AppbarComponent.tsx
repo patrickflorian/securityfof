@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
-import AppModalButton from '@components/modal/AppModal';
+import AppModalButton from '@components/modal/AppBarModalButton';
 import { Text, TouchableRipple, Switch, List, Divider } from 'react-native-paper';
 import { ThemeContext } from '@context/context';
 import {
@@ -34,14 +34,15 @@ const AppbarComponent = (props: any) => {
     },
     preference: {
       width: '100%',
-      height:'80%',
+      //height:'80%',
     },
   });
   return (
     <Appbar.Header style={{ width: '100%' }} theme={{ ...theme, colors: { ...theme.colors, primary: theme.colors.background } }} >
       <Appbar.Content title="Welcome back" subtitle={"To Secutity FOF"} />
       <AppModalButton>
-        <View style={{ width: '100%' }}>
+
+        <View style={styles.preference}>
           <List.Item
             title="John Doe"
             description="technician"
@@ -51,9 +52,6 @@ const AppbarComponent = (props: any) => {
             style={{ alignItems: "center", alignContent: 'center', justifyContent: 'center' }}
           />
           <Divider />
-        </View>
-
-        <View style={styles.preference}>
           <List.Item
             title="Mes documents"
             left={props => <List.Icon {...props} icon='file-pdf-outline' />}
@@ -67,16 +65,16 @@ const AppbarComponent = (props: any) => {
             title="Dark Theme"
             right={props => <Switch value={theme.dark} pointerEvents="none" color={theme.colors.primary} onValueChange={(value) => toggleTheme()} />}
           />
-          <View style={{ bottom:0, left:0, width: '100%', position: 'absolute'}}>
+          <View /* style={{ bottom:0, left:0, width: '100%', position: 'absolute'}} */>
             <Divider />
             <List.Item
               title="Deconnexion"
               right={props => <List.Icon {...props} icon='logout-variant' />}
-              //style={{bottom:0, left:0, width: '100%', position: 'absolute'}}
+            //style={{bottom:0, left:0, width: '100%', position: 'absolute'}}
             />
           </View>
         </View>
-          
+
       </AppModalButton>
     </Appbar.Header>
   );
