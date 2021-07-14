@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./",
+      "paths": {
+        "@classes": ["./src/classes"],
+        "@components": ["./src/components"],
+        "@constants": ["./src/constants"],
+        "@context": ["./src/context"],
+        "@helpers": ["./src/helpers"],
+        "@locales": ["./src/locales"],
+        "@res": ["./src/res"],
+        "@routes": ["./src/routes"],
+        "@screens": ["./src/screens"],
+        "@services": ["./src/services"],
+        "@store": ["./src/store"],
+      }
+    },
+      "extensions": [
+        ".ios.js",
+        ".android.js",
+        ".js",
+        ".jsx",
+        ".json",
+        ".tsx",
+        ".ts",
+        ".native.js",
+      ],
+    "include": ["./src"],
+    "exclude": ["node_modules"]
+}
