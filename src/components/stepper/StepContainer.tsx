@@ -115,6 +115,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 alignContent: 'center',
                 alignItems: 'flex-end',
                 alignSelf: 'stretch',
+                //position: 'absolute',
             },
             navigationButtonContainer: {
                 flexDirection: 'row',
@@ -125,6 +126,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 marginBottom: 5, 
                 alignSelf: 'flex-end',
                 height: 50,
+                //position: 'absolute',
             },
             contentContainer:{
                 height: WHeight-45-STATUS_BAR*4,
@@ -134,6 +136,9 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 justifyContent: 'center',
                 alignItems:'center',
             },
+            scrollOnTop: {
+                //position: 'absolute',
+            }
 
         })
         const { children, Wrapper, onSubmit, setStep, ...rest } = this.props;
@@ -143,7 +148,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
             <View style={styles.container} >
 
                 <View  style={styles.contentContainer}>
-                    <ScrollView>
+                    <ScrollView style={styles.scrollOnTop}>
                         {this.childrenArray.map((child: any, index: number) =>
                                 <View key={index} style={{display:(step === index)?"flex":"none"}}>{child}</View>)}
                     </ScrollView>

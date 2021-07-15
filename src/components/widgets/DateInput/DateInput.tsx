@@ -9,16 +9,13 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import {
-  Avatar,
-  IconButton,
-  List,
-  Surface,
   TextInput,
   useTheme,
 } from 'react-native-paper';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
+import { useEffect } from 'react';
 /**
  * Custom date input component
  */
@@ -37,7 +34,8 @@ const DateInput = (props: any) => {
     },
     input: {
       //marginTop: 2,
-      height: 25,
+      //height: 25,
+      width: "100%",
     },
   });
   const onChange = (event: Event, selectedDate?: Date) => {
@@ -45,35 +43,33 @@ const DateInput = (props: any) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
+    props.onChange(currentDate);
   };
   const { icon } = props;
+
+  useEffect(()=>{
+    
+  },[date])
   return (
     <View
       style={{
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        width: "100%",
       }}>
-      <TouchableOpacity
-        onPress={() => {setShow(true); console.log('press')} }>
         <TextInput
           mode="outlined"
           value={date.toLocaleDateString()}
-          style={styles.input}
+          //style={styles.input}
+          
           icon="calendar"
-          {...props}
+          right={<TextInput.Icon name="calendar"color={theme.colors.disabled}
+          size={25}
+          onPress={() => setShow(true)}/>}
           disabled
+          {...props}
         />
-      </TouchableOpacity>
-
-      <IconButton
-        icon="calendar"
-        style={styles.icon}
-        centered
-        color={theme.colors.backdrop}
-        size={25}
-        onPress={() => setShow(true)}
-      />
       {show && (
         <DateTimePicker
           value={date}
@@ -81,6 +77,7 @@ const DateInput = (props: any) => {
           is24Hour={true}
           display="default"
           onChange={onChange}
+          dateFormat={'day month year'}
         />
       )}
     </View>
