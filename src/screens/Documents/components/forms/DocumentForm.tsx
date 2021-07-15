@@ -11,6 +11,8 @@ import { DOCUMENT_FORM } from '@constants/formNames';
 import { renderField } from '@components/widgets/FormBuilder/FieldBuilder';
 import FormStepContainer from '@components/stepper/StepContainer';
 import { FormStep, StepComponentProps } from '@components/stepper/Step';
+import DateInput from '@components/widgets/DateInput/DateInput';
+import DocumentIdentificationComponent from './steps/DocumentIdentification';
 
 /**
  *
@@ -244,11 +246,11 @@ export const DocumentFormComponent = (props: any) => {
   };
   return (<React.Fragment>
     <FormStepContainer >
-      <FormStep name='time' title='date' Component={(props) => <Text>Bonjour dechet</Text>} />
+      {/* <FormStep name='time' title='date' Component={(props) => <Text>Bonjour dechet</Text>} /> */}
       <FormStep
-        name="date"
-        title="Date"
-        Component={(props) => <FormComponent {...props} />}
+        name="identification"
+        title="Identification"
+        Component={(props) => <DocumentIdentificationComponent {...props} />}
       >
       </FormStep>
     </FormStepContainer>
