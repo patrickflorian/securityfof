@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
 import {View, Text, Alert} from 'react-native';
 import {HelperText, TextInput, useTheme} from 'react-native-paper';
+import DateInput from '../DateInput/DateInput';
 import {Select} from '../Select';
 
 export const renderField = ({meta, input, type, ...inputProps}) => {
   const {touched, error, warning, asyncValidating} = meta;
   const theme = useTheme();
 
-  const renderInput =(type)=>{
+  const renderInput =(type: string)=>{
     let inputComponent;
     switch (type) {
             case 'select':
@@ -16,6 +17,15 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
               onBlur={input.onBlur}
               onFocus={input.onFocus}
               defaultValue={input.value}
+              underlineColor={error && theme.colors.notification}
+              {...inputProps}/>
+              break;
+            case 'date':
+              inputComponent = <DateInput 
+              onChange={input.onChange}
+              onBlur={input.onBlur}
+              onFocus={input.onFocus}
+              //defaultValue={input.value}
               underlineColor={error && theme.colors.notification}
               {...inputProps}/>
               break;
@@ -38,7 +48,8 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
       style={{
         flexDirection: 'column',
         alignItems: 'flex-start',
-        marginBottom: 20,
+        marginBottom: 10,
+        marginHorizontal: 5,
       }}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         {renderInput(type)}
@@ -47,10 +58,10 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
       {touched &&
         ((error && <HelperText type={'error'}>{error}</HelperText>) ||
           (warning && (
-            <TexHelperTextt style={{color: 'orange'}}>{warning}</TexHelperTextt>
+            <HelperText type="info" style={{color: 'orange'}}>{warning}</HelperText>
           )) ||
           (asyncValidating && (
-            <HelperText style={{color: 'orange'}}>Validating...</HelperText>
+            <HelperText  type="info" style={{color: 'orange'}}>Validating...</HelperText>
           )))}
     </View>
   );

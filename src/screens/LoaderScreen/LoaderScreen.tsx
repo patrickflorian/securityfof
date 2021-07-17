@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
 const LoaderScreen = (props: any) => {
   const {navigation} = props;
   const [loading, setLoading] = useState<boolean>(true);
-  const [isFirstLaunch, setIsFirstLaunch] = useState<boolean>();
-  const [isLogged, setLogged] = useState<boolean>();
+  const [isFirstLaunch, setIsFirstLaunch] = useState<any>(null);
+  const [isLogged, setLogged] = useState<any>(null);
   const theme = useTheme();
 
   useEffect(() => {

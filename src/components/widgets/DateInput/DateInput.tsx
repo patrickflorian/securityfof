@@ -8,22 +8,18 @@
  * @param
  */
 
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 import {
-  Avatar,
-  IconButton,
-  List,
-  Surface,
   TextInput,
   useTheme,
 } from 'react-native-paper';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import Button from '../Button/Button';
+import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
+import { useEffect } from 'react';
 /**
  * Custom date input component
  */
-const DateInput = (props) => {
+const DateInput = (props: any) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -37,38 +33,43 @@ const DateInput = (props) => {
       alignSelf: 'center',
     },
     input: {
-      marginTop: 2,
-      height: 25,
+      //marginTop: 2,
+      //height: 25,
+      width: "100%",
     },
   });
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: Event, selectedDate?: Date) => {
+    if (event.type === "set") console.log("value:" , selectedDate);
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
+    props.onChange(currentDate);
   };
-  const {icon} = props;
+  const { icon } = props;
+
+  useEffect(()=>{
+    
+  },[date])
   return (
     <View
       style={{
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        width: "100%",
       }}>
-      <TextInput
-        mode="outlined"
-        value={date.toLocaleDateString()}
-        style={styles.input}
-        icon="date"
-        {...props}
-      />
-      <IconButton
-        icon="calendar"
-        style={styles.icon}
-        centered
-        color={theme.colors.backdrop}
-        size={25}
-        onPress={() => setShow(true)}
-      />
+        <TextInput
+          mode="outlined"
+          value={date.toLocaleDateString()}
+          //style={styles.input}
+          
+          icon="calendar"
+          right={<TextInput.Icon name="calendar"color={theme.colors.disabled}
+          size={25}
+          onPress={() => setShow(true)}/>}
+          disabled
+          {...props}
+        />
       {show && (
         <DateTimePicker
           value={date}
@@ -76,6 +77,7 @@ const DateInput = (props) => {
           is24Hour={true}
           display="default"
           onChange={onChange}
+          dateFormat={'day month year'}
         />
       )}
     </View>

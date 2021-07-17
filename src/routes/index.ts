@@ -1,4 +1,3 @@
-import {roundToNearestPixel} from 'react-native/Libraries/Utilities/PixelRatio';
 
 /**
  * Les constantes represeentants les screen
@@ -13,8 +12,12 @@ const ACCOUNT = 'Account';
 const ACCOUNT_CATEGORIES = 'AccountCategories';
 const ACCOUNT_FORM = 'AccountForm';
 const ACCOUNT_HOME = 'AccountHome';
+const DOCUMENT = 'Documents';
+const DOCUMENT_FORM = 'DocumentsForm';
+const DOCUMENT_HOME = 'DocumentsHome';
 const INCOME = 'Income';
 const OUTCOME = 'Outcome';
+const MODAL = 'modal';
 const BUDGET = 'Budget';
 const SINGLE_ACCOUNT = 'SingleAccount';
 const SINGLE_ACCOUNT_HOME = 'SingleAccountHome';
@@ -23,6 +26,7 @@ const SINGLE_ACCOUNT_TRANSFERT = 'SingleAccountTransfert';
 const SINGLE_ACCOUNT_STATS = 'SingleAccountStats';
 const DRAWER = 'Drawer';
 const SUSCRIPTION = 'Suscription';
+const NOTABBAR = 'noTabBar';
 /**
  * Les constantes repressentants les NAvigateurs
  */
@@ -36,10 +40,15 @@ const routenames = {
   ACCOUNT_FORM,
   BUDGET,
   DRAWER,
+  DOCUMENT,
+  DOCUMENT_FORM,
+  DOCUMENT_HOME,
   INCOME,
   HOME,
   LOADER,
+  NOTABBAR,
   LOGIN,
+  MODAL,
   ONBOARDING,
   OUTCOME,
   PASSWORD_RESET,
