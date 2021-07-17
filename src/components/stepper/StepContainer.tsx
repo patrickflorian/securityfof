@@ -165,5 +165,5 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
 }
 ;
 
-const StepFormContainer = reduxForm({ form: DOCUMENT_FORM })(FormComponent)
+const StepFormContainer = reduxForm({ form: DOCUMENT_FORM, })(FormComponent)
 export default StepFormContainer;

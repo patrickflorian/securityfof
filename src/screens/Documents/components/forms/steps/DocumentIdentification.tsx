@@ -64,7 +64,8 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-        validate={[required]}
+        //validate={[required]}
+        autoFocus
       />
       <Field
         //autoFocus
@@ -78,7 +79,7 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-        validate={[required, maxLength15]}
+        //validate={[required, maxLength15]}
       />
        <Field
         //autoFocus
@@ -92,14 +93,6 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-        validate={[required]}
-        /* right={
-          <TextInput.Icon
-            name="alpha-l-box-outline"
-            color={theme.colors.disabled}
-            onPress={() => { }}
-          />
-        } */
       />
     </View>
   );
