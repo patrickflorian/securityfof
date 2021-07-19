@@ -28,21 +28,53 @@ const maxLength15 = maxLength(15);
  *
  * @param {*} props
  */
-const DocumentIdentificationComponent = (props: StepComponentProps) => {
+const DocumentTasksComponent = (props: StepComponentProps) => {
   const { t, i18n } = useTranslation();
   //const {submitting} = props;
 
   const theme = useTheme();
 
-  const accounts_categories = [
+  const risk_natures = [
     {
-      value: 'Om',
-      title: 'Orange Money',
+      value: 'electricity',
+      title: 'Electricité',
     },
     {
-      value: 'Mtn',
-      title: 'Mobile Money',
+      value: 'mecanic',
+      title: 'Mécanique',
     },
+    {
+      value: 'environnement',
+      title: 'Environnement',
+    },
+    {
+      value: 'traffic',
+      title: 'Trafic routier',
+    },
+    {
+      value: 'chute',
+      title: 'Chute',
+    },
+    {
+      value: 'chimic',
+      title: 'Chimique',
+    },
+  ];
+
+  const mesure_types = [
+    {
+      value: 'elimination',
+      title: 'Elimination',
+    },
+    {
+      value: 'Exposition',
+      title: 'Exposition',
+    },
+    {
+      value: 'protection',
+      title: 'Protection',
+    },
+    
   ];
 
   return (
@@ -53,47 +85,8 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
         justifyContent: 'center',
         marginTop:35,
       }}>
-      <Field
-        name={'dateProjet'}
-        type="date"
-        keyboardType="default"
-        label={'Date d\'enregistrement'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required, maxLength15]}
-      />
-      <Field
-        name={'lieu'}
-        type="text"
-        keyboardType="default"
-        label={'Lieu'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
-      <Field
-        name={'project'}
-        type="text"
-        keyboardType="default"
-        label={'Projet'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
        <Field
-        name={'taf'}
+        name={'taskTaf'}
         type="text"
         keyboardType="default"
         label={'TAF'}
@@ -105,19 +98,101 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
         }}
       />
       <Field
-        name={'nbreIntervenant'}
-        type="number"
-        keyboardType="numeric"
-        label={'Nombre d\'intervenants'}
+        name={'danger'}
+        type="text"
+        keyboardType="default"
+        label={'Danger'}
         component={renderField}
         //normalize={normalizeLower}
         style={{
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
+        //validate={[required, maxLength15]}
+      />
+      <Field
+        name={'risk'}
+        type="text"
+        keyboardType="default"
+        label={'Risque'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        //validate={[required]}
+      />
+      <Field
+        name={'account_type'}
+        type="select"
+        items={risk_natures}
+        keyboardType="default"
+        label={'Nature'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required, maxLength15]}
+        /* right={
+          <TextInput.Icon
+            name="email-outline"
+            color={theme.colors.disabled}
+            onPress={() => {}}
+          />
+        } */
+      />
+      <Field
+        name={'corrective_mesure'}
+        type="text"
+        keyboardType="default"
+        label={'Mesure corrective'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        //validate={[required]}
+      />
+      <Field
+        name={'mesure_type'}
+        type="select"
+        items={mesure_types}
+        keyboardType="default"
+        label={'Type de mesure'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required, maxLength15]}
+        /* right={
+          <TextInput.Icon
+            name="email-outline"
+            color={theme.colors.disabled}
+            onPress={() => {}}
+          />
+        } */
+      />
+      <Field
+        name={'necessary'}
+        type="text"
+        keyboardType="default"
+        label={'Equipement necessaire'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        //validate={[required]}
       />
     </View>
   );
 };
 
-export default DocumentIdentificationComponent;
+export default DocumentTasksComponent;

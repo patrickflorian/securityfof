@@ -10,6 +10,8 @@ import { DOCUMENT_FORM } from '@constants/formNames';
 import FormStepContainer from '@components/stepper/StepContainer';
 import { FormStep, StepComponentProps } from '@components/stepper/Step';
 import DocumentIdentificationComponent from './steps/DocumentIdentification';
+import DocumentTasksComponent from './steps/DocumentTasks';
+import InterventionComponent from './steps/Intervention';
 
 export const DocumentFormComponent = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -77,7 +79,12 @@ export const DocumentFormComponent = (props: any) => {
       <FormStep
         name="taches"
         title="Taches"
-        Component={(props) => <DocumentIdentificationComponent {...props} />}
+        Component={(props) => <DocumentTasksComponent {...props} />}
+      />
+      <FormStep
+        name="intervention"
+        title="Interventions"
+        Component={(props) => <InterventionComponent {...props} />}
       />
     </FormStepContainer>
   </React.Fragment>);

@@ -6,10 +6,14 @@ import {
   Portal,
   Text,
   TextInput,
+  TouchableRipple,
   useTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const SelectModal = (props) => {
+  const {items, onChoose, visible, onDismiss} = props;
+  const theme = useTheme()
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -23,22 +27,19 @@ const styles = StyleSheet.create({
     width: '80%',
     marginTop: 10,
     //alignItems:'center',
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.surface,
     justifyContent: 'center',
   },
   header: {
       width: '80%',
     //alignSelf: 'stretch',
-    backgroundColor: 'transparent',
+    backgroundColor: theme.colors.transparent,
   },
 });
-const SelectModal = (props) => {
-  const {items, onChoose, visible, onDismiss} = props;
   return (
     <Portal>
       <Modal
         visible={visible}
-        dismissable={false}
         onDismiss={onDismiss}
         contentContainerStyle={{height: '30%'}}>
         <View style={styles.container}>
@@ -94,6 +95,7 @@ export const Select = (props) => {
   }, [selectedItem]);
   return (
     <>
+    <TouchableRipple style={{width: '100%'}}  onPress={showModal}>
       <TextInput
         onFocus={() => setVisible(true)}
         value={selectedItem?.title}
@@ -108,6 +110,7 @@ export const Select = (props) => {
         }
         showSoftInputOnFocus={false}
       />
+      </TouchableRipple>
       <SelectModal
         items={items}
         visible={visible}
