@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import {
   TextInput,
+  TouchableRipple,
   useTheme,
 } from 'react-native-paper';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
@@ -20,9 +21,10 @@ import { useEffect } from 'react';
  * Custom date input component
  */
 const DateInput = (props: any) => {
+  const { icon, autoFocus } = props;
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(autoFocus);
   const theme = useTheme();
   const styles = StyleSheet.create({
     icon: {
@@ -39,17 +41,16 @@ const DateInput = (props: any) => {
     },
   });
   const onChange = (event: Event, selectedDate?: Date) => {
-    if (event.type === "set") console.log("value:" , selectedDate);
+    if (event.type === "set") console.log("value:", selectedDate);
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
     props.onChange(currentDate);
   };
-  const { icon } = props;
+  useEffect(() => {
 
-  useEffect(()=>{
-    
-  },[date])
+  }, [date])
+
   return (
     <View
       style={{
@@ -58,18 +59,24 @@ const DateInput = (props: any) => {
         alignItems: 'center',
         width: "100%",
       }}>
+      <TouchableRipple 
+        style={{
+          width: '100%',
+        }} 
+        onPress={() => setShow(true)}
+      >
         <TextInput
           mode="outlined"
           value={date.toLocaleDateString()}
           //style={styles.input}
-          
           icon="calendar"
-          right={<TextInput.Icon name="calendar"color={theme.colors.disabled}
+          right={<TextInput.Icon name="calendar" color={theme.colors.disabled}
           size={25}
-          onPress={() => setShow(true)}/>}
+          onPress={() => setShow(true)} />}
           disabled
           {...props}
         />
+      </TouchableRipple>
       {show && (
         <DateTimePicker
           value={date}
