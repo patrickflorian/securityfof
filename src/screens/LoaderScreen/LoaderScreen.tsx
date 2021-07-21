@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   image: {
     width: window.width * 0.5,
     height: window.width * 0.5,
+    marginBottom : 50,
   },
 });
 

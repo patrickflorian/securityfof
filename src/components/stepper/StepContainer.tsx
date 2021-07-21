@@ -151,7 +151,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 <View  style={styles.contentContainer}>
                     <ScrollView style={styles.scrollOnTop}>
                         {this.childrenArray.map((child: any, index: number) =>
-                                <View key={index} style={{display:(step === index)?"flex":"none", width:'100%'}}>{child}</View>)}
+                                <View key={index} style={{display:(step === index)?"flex":"none", width:'100%', height:'100%'}}>{child}</View>)}
                     </ScrollView>
                 </View>
             

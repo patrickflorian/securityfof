@@ -93,17 +93,16 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
         //validate={[required]}
       />
        <Field
-        name={'taf'}
-        type="text"
-        keyboardType="default"
-        label={'TAF'}
+        name={'image'}
+        type="camera"
         component={renderField}
         //normalize={normalizeLower}
         style={{
           width: '100%',
           backgroundColor: theme.colors.surface,
+          justifyContent: "center"
         }}
-      />
+      />{/* 
       <Field
         name={'nbreIntervenant'}
         type="number"
@@ -115,7 +114,7 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-      />
+      /> */}
     </View>
   );
 };

@@ -44,7 +44,7 @@ const AppbarComponent = (props: any) => {
 
         <View style={styles.preference}>
           <List.Item
-            title="John Doe"
+            title="CHENDJOU Pierre"
             description="technician"
             titleStyle={{ fontWeight: theme.fonts.medium.fontWeight, fontSize: 13 }}
             descriptionStyle={{ fontWeight: theme.fonts.thin.fontWeight, fontSize: 11 }}
