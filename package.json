@@ -11,7 +11,7 @@
     "link": "react-native link",
     "cleanAndRun": "cd android && gradlew clean && cd .. && react-native run-android",
     "release": "cd android && gradlew assembleRelease --warning-mode all",
-    "releaseAndroid": "react-native run-android --variant=release",
+    "releaseAndroid": "react-native run-android --variant=release --deviceId=04593149AK109216",
     "bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/"
   },
   "dependencies": {
