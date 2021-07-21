@@ -65,31 +65,31 @@ const DocumentsScreen = (props: any) => {
           <Animated.View style={{ width: '100%' }}>
             <List.Item
               title="Analyse des risques"
-              description="Item description"
+              description="document sur l'analyse de risques"
               onPress={openDocumentForm}
               left={props => <List.Icon {...props} icon="folder" />}
             />
             <List.Item
               title="Mode opératoire"
-              description="Item description"
+              description="document sur le mode operatoire"
               onPress={openDocumentForm}
               left={props => <List.Icon {...props} icon="folder" />}
             />
             <List.Item
               title="Feu vert de sécurité"
-              description="Item description"
+              description="document sur le feu vert de securité"
               onPress={openDocumentForm}
               left={props => <List.Icon {...props} icon="folder" />}
             />
             <List.Item
               title="Visite de chantier"
-              description="Item description"
+              description="documents"
               onPress={openDocumentForm}
               left={props => <List.Icon {...props} icon="folder" />}
             />
             <List.Item
               title="Sensibilisation"
-              description="Item description"
+              description="document sur la sensibilisation"
               left={props => <List.Icon {...props} icon="folder" />}
             />
             <List.Item
@@ -97,7 +97,6 @@ const DocumentsScreen = (props: any) => {
               description="Item description"
               left={props => <List.Icon {...props} icon="folder" />}
             />
-
           </Animated.View>
         </View>
       </ScrollView>
