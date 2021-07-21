@@ -10,6 +10,9 @@ import { DOCUMENT_FORM } from '@constants/formNames';
 import FormStepContainer from '@components/stepper/StepContainer';
 import { FormStep, StepComponentProps } from '@components/stepper/Step';
 import DocumentIdentificationComponent from './steps/DocumentIdentification';
+import DocumentTasksComponent from './steps/DocumentTasks';
+import InterventionComponent from './steps/Intervention';
+import CameraInputComponent from '@components/widgets/CameraInputComponent';
 
 export const DocumentFormComponent = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -67,18 +70,28 @@ export const DocumentFormComponent = (props: any) => {
     });
   };
   return (<React.Fragment>
-    <FormStepContainer >
+    <FormStepContainer  >
       {/* <FormStep name='time' title='date' Component={(props) => <Text>Bonjour dechet</Text>} /> */}
       <FormStep
         name="identification"
         title="Identification"
         Component={(props) => <DocumentIdentificationComponent {...props} />}
       />
+     {/*  <FormStep
+        name="taches"
+        title="Taches"
+        Component={(props) => <DocumentTasksComponent {...props} />}
+      />
       <FormStep
         name="taches"
         title="Taches"
-        Component={(props) => <DocumentIdentificationComponent {...props} />}
+        Component={(props) => <CameraInputComponent {...props} />}
       />
+      <FormStep
+        name="intervention"
+        title="Interventions"
+        Component={(props) => <InterventionComponent {...props} />}
+      /> */}
     </FormStepContainer>
   </React.Fragment>);
 };

@@ -6,6 +6,7 @@ import { View, ScrollView, Dimensions, StatusBar } from 'react-native';
 import { DOCUMENT_FORM } from '@constants/formNames';
 import { Button, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
+import SubmitButton from '@components/widgets/FormBuilder/SubmitButton';
 
 /**
  * @interface StepContainerProps
@@ -126,7 +127,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 marginBottom: 5, 
                 alignSelf: 'flex-end',
                 height: 50,
-                //position: 'absolute',
+                alignContent: 'flex-end'
             },
             contentContainer:{
                 height: WHeight-45-STATUS_BAR*4,
@@ -137,7 +138,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 alignItems:'center',
             },
             scrollOnTop: {
-                //position: 'absolute',
+                width:"100%",
             }
 
         })
@@ -150,13 +151,17 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                 <View  style={styles.contentContainer}>
                     <ScrollView style={styles.scrollOnTop}>
                         {this.childrenArray.map((child: any, index: number) =>
-                                <View key={index} style={{display:(step === index)?"flex":"none"}}>{child}</View>)}
+                                <View key={index} style={{display:(step === index)?"flex":"none", width:'100%', height:'100%'}}>{child}</View>)}
                     </ScrollView>
                 </View>
             
                 <View style={styles.navigationButtonContainer}>
-                    {/* !this.isFirstStep() && */ <Button icon='arrow-left' disabled={this.isFirstStep()} onPress={() => this.previousStep()} >Prev</Button>}
-                    {/* !this.isLastStep() &&  */<Button icon='arrow-right' contentStyle={{ flexDirection: 'row-reverse' }} disabled={this.isLastStep()} onPress={() => this.nextStep()}>Next</Button>}
+                    { <Button icon='arrow-left' disabled={this.isFirstStep()} onPress={() => this.previousStep()} >Prev</Button>}
+                    {!this.isLastStep()
+                    ? 
+                    <Button icon='arrow-right'contentStyle={{ flexDirection: 'row-reverse', alignSelf:'flex-end' }} disabled={this.isLastStep()} onPress={() => this.nextStep()}>Next</Button>
+                    :<SubmitButton type='primary' filled={false} contentStyle={{ flexDirection: 'row-reverse' }} disabled={this.isLastStep()} onPress={() => this.nextStep()}>Save</SubmitButton>
+                    }
                 </View>
             </View>
         );
@@ -165,5 +170,5 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
 }
 ;
 
-const StepFormContainer = reduxForm({ form: DOCUMENT_FORM })(FormComponent)
+const StepFormContainer = reduxForm({ form: DOCUMENT_FORM, })(FormComponent)
 export default StepFormContainer;

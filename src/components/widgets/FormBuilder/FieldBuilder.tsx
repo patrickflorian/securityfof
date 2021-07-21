@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, Alert} from 'react-native';
 import {HelperText, TextInput, useTheme} from 'react-native-paper';
+import CameraInputComponent from '../CameraInputComponent';
 import DateInput from '../DateInput/DateInput';
 import {Select} from '../Select';
 
@@ -29,6 +30,14 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
               underlineColor={error && theme.colors.notification}
               {...inputProps}/>
               break;
+          case 'camera':
+              inputComponent = <CameraInputComponent 
+              onFile={input.onChange}
+              onBlur={input.onBlur}
+              value={input.value}
+              onFocus={input.onFocus}
+              {...inputProps}/>
+              break;
           
             default: inputComponent = <TextInput
             onChange={input.onChange}
@@ -43,8 +52,8 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
           }
           return inputComponent;
   }
-  return (
-    <View
+  return (<>
+    {type!=="camera" &&<View
       style={{
         flexDirection: 'column',
         alignItems: 'flex-start',
@@ -63,6 +72,8 @@ export const renderField = ({meta, input, type, ...inputProps}) => {
           (asyncValidating && (
             <HelperText  type="info" style={{color: 'orange'}}>Validating...</HelperText>
           )))}
-    </View>
+    </View>}
+    {type==="camera" && renderInput(type)}
+    </>
   );
 };

@@ -2,12 +2,14 @@ import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent
 import FormWithStep from '@screens/FormWithStep';
 import React, {useState} from 'react';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import {
   Appbar,
   Avatar,
   useTheme,
 } from 'react-native-paper';
 import DirectorMessageCard from './components/DirectorMessageCard';
+import RHSEMessageCard from './components/RHSEMessageCard';
 
 const HomeScreen = (props: any) => {
   const {navigation} = props;
@@ -32,15 +34,17 @@ const HomeScreen = (props: any) => {
       paddingTop: 15,
       width: windowWidth - 5,
       marginHorizontal: 3,
+      justifyContent: 'space-around',
     },
   });
   return (
     <View style={styles.container}>
       <AppbarComponent/> 
 
-      <View style={styles.cardContainer}>
+      <ScrollView contentContainerStyle={styles.cardContainer}>
         <DirectorMessageCard/>
-      </View>
+        <RHSEMessageCard/>
+      </ScrollView>
     </View>
   );
 };

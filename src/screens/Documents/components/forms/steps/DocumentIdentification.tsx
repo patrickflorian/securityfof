@@ -51,23 +51,9 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
         //flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
+        marginTop:35,
       }}>
       <Field
-        //autoFocus
-        name={'project'}
-        type="text"
-        keyboardType="default"
-        label={'Projet'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        validate={[required]}
-      />
-      <Field
-        //autoFocus
         name={'dateProjet'}
         type="date"
         keyboardType="default"
@@ -78,29 +64,57 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-        validate={[required, maxLength15]}
+        //validate={[required, maxLength15]}
       />
-       <Field
-        //autoFocus
-        name={'taf'}
+      <Field
+        name={'lieu'}
         type="text"
         keyboardType="default"
-        label={'TAF'}
+        label={'Lieu'}
         component={renderField}
         //normalize={normalizeLower}
         style={{
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-        validate={[required]}
-        /* right={
-          <TextInput.Icon
-            name="alpha-l-box-outline"
-            color={theme.colors.disabled}
-            onPress={() => { }}
-          />
-        } */
+        //validate={[required]}
       />
+      <Field
+        name={'project'}
+        type="text"
+        keyboardType="default"
+        label={'Projet'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        //validate={[required]}
+      />
+       <Field
+        name={'image'}
+        type="camera"
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+          justifyContent: "center"
+        }}
+      />{/* 
+      <Field
+        name={'nbreIntervenant'}
+        type="number"
+        keyboardType="numeric"
+        label={'Nombre d\'intervenants'}
+        component={renderField}
+        //normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+      /> */}
     </View>
   );
 };

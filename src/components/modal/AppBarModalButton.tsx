@@ -43,7 +43,7 @@ const AppModalButton = (props: any) => {
         </Modal>
       </Portal>
       <TouchableOpacity onPress={showModal}>
-        <Avatar.Text size={24} label="XD" style={{ backgroundColor: theme.colors.border , borderWidth:1, borderColor:theme.colors.primary}} />
+        <Avatar.Text size={40} label="XD" style={{ backgroundColor: theme.colors.border,marginRight: 5, borderWidth:1, borderColor:theme.colors.primary}} />
       </TouchableOpacity>
     </>
   );
