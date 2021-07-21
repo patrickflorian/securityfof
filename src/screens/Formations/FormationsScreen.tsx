@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Card, Paragraph, Button, List } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
-import ProductCard from '../../components/widgets/ProductList/ProductCard';
 
 import routenames from '../../routes'
 import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent';
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const IncomeScreen = (props: any) => {
+const FormationsScreen = (props: any) => {
   const { navigation } = props;
   return (
     <>
@@ -52,8 +51,8 @@ const IncomeScreen = (props: any) => {
       </Card>
       <Animated.View style={{width: '100%'}}>
         <List.Item
-          title="First Item"
-          description="Item description"
+          title="Comportement à risque"
+          description="cette formation met en evidence les comportements à risque"
           left={props => <List.Icon {...props} icon="folder" />}
         />
         <List.Item
@@ -71,21 +70,10 @@ const IncomeScreen = (props: any) => {
           description="Item description"
           left={props => <List.Icon {...props} icon="folder" />}
         />
-        <List.Item
-          title="First Item"
-          description="Item description"
-          left={props => <List.Icon {...props} icon="folder" />}
-        />
-        <List.Item
-          title="First Item"
-          description="Item description"
-          left={props => <List.Icon {...props} icon="folder" />}
-        />
-
       </Animated.View>
       </View>
     </ScrollView>
     </>
   );
 };
-export default IncomeScreen;
+export default FormationsScreen;
