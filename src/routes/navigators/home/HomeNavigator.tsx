@@ -83,6 +83,7 @@ const HomeNavigator = () => {
       initialRouteName={
         routenames.HOME
       }
+      tabBarOptions={(props)=>({safeAreaInsets:{bottom: 10}})}
     //tabBar={(props)=><Tabbar {...props}/>}
     >
       {
@@ -90,10 +91,11 @@ const HomeNavigator = () => {
           <Tab.Screen name={screen.routename} key={index} component={screen.component}
             options={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => (
-                <Icon name={screen.icon} style={{ fontSize: size, color: focused ? theme.colors.primary : color }} />
+                <Icon name={screen.icon} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
               ),
               tabBarLabel: screen.label,
-              tabBarVisible: getHeaderVisibility(route)
+              tabBarVisible: getHeaderVisibility(route),
+
             })} />
         ))
       }

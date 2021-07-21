@@ -39,7 +39,7 @@ const OutcomeScreen = ({ navigation }) => {
     },
     bodyContent: {
       justifyContent: 'center',
-      alignContent:'center',
+      alignContent: 'center',
       padding: 30,
       alignItems: 'center',
       width: '100%',
@@ -74,13 +74,13 @@ const OutcomeScreen = ({ navigation }) => {
       <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
       <View style={styles.body}>
         <View style={styles.bodyContent}>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.info}>UX Designer / Mobile developer</Text>
+          <Text style={styles.name}>CHENDJOU Pierre</Text>
+          <Text style={styles.info}>Technician</Text>
           <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
           <View>
-            <Badge theme={theme} style={{backgroundColor: theme.colors.disabled}}>environnement</Badge>
+            <Badge theme={theme} style={{ backgroundColor: theme.colors.disabled }}>environnement</Badge>
           </View>
-         {/*  <TouchableOpacity style={styles.buttonContainer}>
+          {/*  <TouchableOpacity style={styles.buttonContainer}>
             <Text>Opcion 1</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>

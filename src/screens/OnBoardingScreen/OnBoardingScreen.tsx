@@ -32,9 +32,9 @@ const OnBoardingScreen = (props: any) => {
       },
       {
         backgroundColor: '#999',
-        image: <Image source={require('@res/img/triangle.png')} />,
-        title: 'Triangle',
-        subtitle: "Beautiful, isn't it?",
+        image: <Image source={require('@res/img/logo2.jpg')} />,
+        title: 'Sauvegarder et partagez les documents de securité',
+        subtitle: "C'est beau, n'est ce pas?",
       },
   ]}
   onDone = {()=>navigation.replace(routenames.LOGIN)}

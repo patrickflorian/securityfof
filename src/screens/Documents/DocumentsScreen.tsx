@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
 const DocumentsScreen = (props: any) => {
   //const { navigation } = props;
   const navigation = useNavigation();
+
+  const openDocumentForm =() =>{ 
+    navigation.setOptions({tabBarVisible: false}) ;
+    navigation.navigate(routenames.DOCUMENT_FORM)
+  };
+
+
   return (
     <>
       <AppbarComponent />
@@ -43,11 +50,7 @@ const DocumentsScreen = (props: any) => {
               {/* <FormModalButton icon="plus" style={{}} title="Nouveau">
                 <DocumentFormComponent/>
               </FormModalButton> */}
-              <Button onPress={
-                () =>{ 
-                  navigation.setOptions({tabBarVisible: false}) ;
-                  navigation.navigate(routenames.DOCUMENT_FORM)
-                }}>Nouveau</Button>
+              <Button onPress={openDocumentForm}>Nouveau</Button>
             </Card.Actions>
           </Card>
           <Card style={styles.card} >
@@ -61,32 +64,36 @@ const DocumentsScreen = (props: any) => {
           </Card>
           <Animated.View style={{ width: '100%' }}>
             <List.Item
-              title="First Item"
+              title="Analyse des risques"
+              description="Item description"
+              onPress={openDocumentForm}
+              left={props => <List.Icon {...props} icon="folder" />}
+            />
+            <List.Item
+              title="Mode opératoire"
+              description="Item description"
+              onPress={openDocumentForm}
+              left={props => <List.Icon {...props} icon="folder" />}
+            />
+            <List.Item
+              title="Feu vert de sécurité"
+              description="Item description"
+              onPress={openDocumentForm}
+              left={props => <List.Icon {...props} icon="folder" />}
+            />
+            <List.Item
+              title="Visite de chantier"
+              description="Item description"
+              onPress={openDocumentForm}
+              left={props => <List.Icon {...props} icon="folder" />}
+            />
+            <List.Item
+              title="Sensibilisation"
               description="Item description"
               left={props => <List.Icon {...props} icon="folder" />}
             />
             <List.Item
-              title="First Item"
-              description="Item description"
-              left={props => <List.Icon {...props} icon="folder" />}
-            />
-            <List.Item
-              title="First Item"
-              description="Item description"
-              left={props => <List.Icon {...props} icon="folder" />}
-            />
-            <List.Item
-              title="First Item"
-              description="Item description"
-              left={props => <List.Icon {...props} icon="folder" />}
-            />
-            <List.Item
-              title="First Item"
-              description="Item description"
-              left={props => <List.Icon {...props} icon="folder" />}
-            />
-            <List.Item
-              title="First Item"
+              title="Briefing"
               description="Item description"
               left={props => <List.Icon {...props} icon="folder" />}
             />
