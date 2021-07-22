@@ -1,6 +1,6 @@
-import { User } from "@classes/User"
-import { Alert } from "react-native"
-import { API_URL } from "."
+import { User } from "@classes/User";
+import { Alert } from "react-native";
+import { API_URL } from "@routes/api";
 
 export const login = (email: string, password: string) => {
     return fetch(API_URL + '/api/login', {
