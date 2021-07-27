@@ -1,6 +1,4 @@
 import  actionTypes from '@store/redux/actions';
-import { Alert } from 'react-native';
-
 
 //const contact = localStorage.get("user") ? JSON.parse(localStorage.get("user")) : {};
  const initialState = {

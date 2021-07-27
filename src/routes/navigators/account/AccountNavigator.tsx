@@ -15,6 +15,11 @@ import {AccountScreen, AccountFormScreen} from '../../../screens/Accounts';
 import routenames from '@routes/index'
 import AccountTabNavigator from './AccountTabNavigator';
 import AccountCategoriesScreen from '../../../screens/Accounts/AccountCategories/AccountCategories';
+<<<<<<< HEAD
+=======
+import { SignUpScreen } from '@screens/SignUpScreen';
+import UserListScreen from '@screens/UserAccount/UserListScreen';
+>>>>>>> master
 
 const Stack = createStackNavigator();
 
@@ -51,35 +56,13 @@ const Header = (props: any) => {
 
 const AccountNavigator = ({}) => (
   <Stack.Navigator
-    screenOptions={{
-      header: ({scene, previous, navigation}) => (
-        <Header scene={scene} previous={previous} navigation={navigation} />
-      ),
-    }}
-    initialRouteName={routenames.ACCOUNT_HOME}>
+    initialRouteName={routenames.c}>
     <Stack.Screen
-      name={routenames.ACCOUNT_HOME}
-      component={AccountScreen}
-      options={{headerTitle: "Comptes d'exploitation", headerShown: false}}
+      name={routenames.AGENTS}  component={UserListScreen}
+      options={{headerShown: false}}
     />
-    <Stack.Screen
-      name={routenames.SINGLE_ACCOUNT}
-      component={AccountTabNavigator}
-      /* options={{headerTitle: "Comptes d'exploitation", headerShown: true}} */
-    />
-    <Stack.Screen
-      name={routenames.ACCOUNT_FORM}
-      component={AccountFormScreen}
-      options={{headerTitle: 'Ajouter un compte'}}
-    />
-    <Stack.Screen
-      name={routenames.ACCOUNT_CATEGORIES}
-      component={AccountCategoriesScreen}
-      options={{
-        headerTitle: 'Categories de comptes',
-        headerShown: false
-      }}
-    />
+   
+   <Stack.Screen name={routenames.SIGN_UP} component={SignUpScreen} options={{headerTitle : 'Inscription'}}/>
   </Stack.Navigator>
 );
 

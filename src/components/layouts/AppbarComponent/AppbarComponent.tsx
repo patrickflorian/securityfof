@@ -8,9 +8,13 @@ import {
   Avatar,
   useTheme,
 } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
+import routenames from '@routes/index';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 const AppbarComponent = (props: any) => {
-  const { navigation } = props;
+  const navigation = useNavigation();
   const windowWidth = Dimensions.get('window').width;
 
   const theme = useTheme();
@@ -21,6 +25,7 @@ const AppbarComponent = (props: any) => {
       alignItems: 'center',
       justifyContent: 'flex-start',
       alignSelf: 'stretch',
+      marginBottom: 5,
       //paddingTop: 5
     },
     linearGradiant: {
@@ -37,18 +42,27 @@ const AppbarComponent = (props: any) => {
       //height:'80%',
     },
   });
+  const [user, setUser] = React.useState();
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(value => {
+      if (value) {
+        setUser(JSON.parse(value));
+      }
+    });
+  })
+
   return (
     <Appbar.Header style={{ width: '100%' }} theme={{ ...theme, colors: { ...theme.colors, primary: theme.colors.background } }} >
-      <Appbar.Content title="Welcome back" subtitle={"To Secutity FOF"} />
+      <Appbar.Content title="Welcome back" subtitle={"To Safety FOF"} />
       <AppModalButton>
 
         <View style={styles.preference}>
           <List.Item
-            title="CHENDJOU Pierre"
-            description="technician"
+            title={user ? user.email : ''}
+            description={user ? user!.profession : ''}
             titleStyle={{ fontWeight: theme.fonts.medium.fontWeight, fontSize: 13 }}
             descriptionStyle={{ fontWeight: theme.fonts.thin.fontWeight, fontSize: 11 }}
-            left={props => <Avatar.Text {...props} style={{ ...props.style, marginVertical: 5, paddingHorizontal: 0 }} size={40} label="JD" />}
+            left={props => <Avatar.Text {...props} style={{ ...props.style, marginVertical: 5, paddingHorizontal: 0 }} size={40} label={user ? user.email.substr(0, 2) : 'XD'} />}
             style={{ alignItems: "center", alignContent: 'center', justifyContent: 'center' }}
           />
           <Divider />
@@ -70,7 +84,8 @@ const AppbarComponent = (props: any) => {
             <List.Item
               title="Deconnexion"
               right={props => <List.Icon {...props} icon='logout-variant' />}
-            //style={{bottom:0, left:0, width: '100%', position: 'absolute'}}
+              //style={{bottom:0, left:0, width: '100%', position: 'absolute'}}
+              onPress={() => { AsyncStorage.removeItem('user'); navigation.replace(routenames.SIGN_IN) }}
             />
           </View>
         </View>

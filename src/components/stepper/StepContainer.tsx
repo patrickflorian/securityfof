@@ -160,7 +160,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
                     {!this.isLastStep()
                     ? 
                     <Button icon='arrow-right'contentStyle={{ flexDirection: 'row-reverse', alignSelf:'flex-end' }} disabled={this.isLastStep()} onPress={() => this.nextStep()}>Next</Button>
-                    :<SubmitButton type='primary' filled={false} contentStyle={{ flexDirection: 'row-reverse' }} disabled={this.isLastStep()} onPress={() => this.nextStep()}>Save</SubmitButton>
+                    :<SubmitButton type='primary' filled={false} contentStyle={{ flexDirection: 'row-reverse' }} disabled={this.isLastStep()} onPress={() =>{ this.props.handleSubmit();}}>Save</SubmitButton>
                     }
                 </View>
             </View>
@@ -170,5 +170,8 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
 }
 ;
 
-const StepFormContainer = reduxForm({ form: DOCUMENT_FORM, })(FormComponent)
+const StepFormContainer =(props: any) =>{
+    const Component =  reduxForm({ form: props.name, })(FormComponent);
+    return <><Component {...props}/></>
+}
 export default StepFormContainer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, GestureResponderEvent } from 'react-native';
 import { Text, Card, Paragraph, Button, List } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 
@@ -8,6 +8,7 @@ import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent
 import { useNavigation } from '@react-navigation/native';
 import FormModalButton from '@components/modal/FormModalButton';
 import DocumentFormComponent from './components/forms/DocumentForm';
+import { DocumentTypes } from '@constants/documentTypes';
 const styles = StyleSheet.create({
   container: {
     marginTop: 15,
@@ -30,74 +31,56 @@ const DocumentsScreen = (props: any) => {
   //const { navigation } = props;
   const navigation = useNavigation();
 
-  const openDocumentForm =() =>{ 
+  const openDocumentForm =(type: String) =>{ 
     navigation.setOptions({tabBarVisible: false}) ;
-    navigation.navigate(routenames.DOCUMENT_FORM)
+    navigation.navigate(routenames.DOCUMENT_LIST, {type: type})
   };
-
 
   return (
     <>
       <AppbarComponent />
       <ScrollView >
         <View style={styles.container}>
-          <Card style={styles.card}>
-            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
-            <Card.Content>
-              <Paragraph>Documents de securité</Paragraph>
-            </Card.Content>
-            <Card.Actions>
-              {/* <FormModalButton icon="plus" style={{}} title="Nouveau">
-                <DocumentFormComponent/>
-              </FormModalButton> */}
-              <Button onPress={openDocumentForm}>Nouveau</Button>
-            </Card.Actions>
-          </Card>
-          <Card style={styles.card} >
-            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
-            <Card.Content>
-              <Paragraph>Documents de securité</Paragraph>
-            </Card.Content>
-            <Card.Actions>
-              <Button icon={"plus"}>Add</Button>
-            </Card.Actions>
-          </Card>
-          <Animated.View style={{ width: '100%' }}>
+          
+          <View style={{ width: '100%' }}>
             <List.Item
               title="Analyse des risques"
-              description="document sur l'analyse de risques"
-              onPress={openDocumentForm}
-              left={props => <List.Icon {...props} icon="folder" />}
+              description="Item description"
+              onPress={(e)=>{openDocumentForm(DocumentTypes.risk)}}
+              left={props => <List.Icon {...props} icon="file-document-outline" />}
             />
             <List.Item
               title="Mode opératoire"
-              description="document sur le mode operatoire"
-              onPress={openDocumentForm}
-              left={props => <List.Icon {...props} icon="folder" />}
+              description="Item description"
+              onPress={(e)=>{openDocumentForm(DocumentTypes.mode)}}
+              left={props => <List.Icon {...props} icon="file-document-outline" />}
             />
             <List.Item
               title="Feu vert de sécurité"
-              description="document sur le feu vert de securité"
-              onPress={openDocumentForm}
-              left={props => <List.Icon {...props} icon="folder" />}
+              description="Item description"
+              onPress={(e)=>{openDocumentForm(DocumentTypes.feu)}}
+              left={props => <List.Icon {...props} icon="file-document-outline" />}
             />
             <List.Item
               title="Visite de chantier"
-              description="documents"
-              onPress={openDocumentForm}
-              left={props => <List.Icon {...props} icon="folder" />}
+              description="Item description"
+              onPress={(e)=>{openDocumentForm(DocumentTypes.chantier)}}
+              left={props => <List.Icon {...props} icon="file-document-outline" />}
             />
             <List.Item
               title="Sensibilisation"
-              description="document sur la sensibilisation"
-              left={props => <List.Icon {...props} icon="folder" />}
+              description="Item description"
+               onPress={(e)=>{openDocumentForm(DocumentTypes.sensibilisation)}}
+              left={props => <List.Icon {...props} icon="file-document-outline" />}
             />
             <List.Item
               title="Briefing"
               description="Item description"
-              left={props => <List.Icon {...props} icon="folder" />}
+              onPress={(e)=>{openDocumentForm(DocumentTypes.briefing)}}
+              left={props => <List.Icon {...props} icon="file-document-outline" />}
             />
-          </Animated.View>
+
+          </View>
         </View>
       </ScrollView>
     </>

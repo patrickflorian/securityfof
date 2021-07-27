@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, FlatList} from 'react-native';
+import { FlatList} from 'react-native';
 
 import Card from './Card';
 
@@ -48,7 +48,10 @@ const CardContainer = (props) => {
   useEffect(
    ()=>{
       if(selectedItem!==null){
+<<<<<<< HEAD
         //Alert.alert(JSON.stringify(selectedItem))
+=======
+>>>>>>> master
         onItemClick(selectedItem);
       }
    } 

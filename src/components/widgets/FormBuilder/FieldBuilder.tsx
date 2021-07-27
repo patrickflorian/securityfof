@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text, Alert} from 'react-native';
+import {View, Text} from 'react-native';
 import {HelperText, TextInput, useTheme} from 'react-native-paper';
 import CameraInputComponent from '../CameraInputComponent';
 import DateInput from '../DateInput/DateInput';

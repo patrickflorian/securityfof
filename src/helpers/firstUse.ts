@@ -1,4 +1,3 @@
-import { Alert } from 'react-native'
 import {getStringData, storeObjectData, storeStringData} from '../store/asyncStorage'
 
 export const firstUse =()=>{

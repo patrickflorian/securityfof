@@ -1,21 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, } from 'react-native';
 import {
-  Appbar,
   Button,
   Card,
   ProgressBar,
-  Surface,
   Text,
   useTheme,
 } from 'react-native-paper';
-import CustomTab from '../../components/layouts/CustomTabBar/CustonTabBar';
-import AccountFilter from '../../components/widgets/Filters/AccountFilter';
-
-import routenames from '../../routes';
-import AccountList from './components/AccountList';
-import { Paragraph, List, Avatar } from 'react-native-paper';
+import { Paragraph } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent';
 const styles = StyleSheet.create({
@@ -93,7 +86,7 @@ const AccountScreen = (props: any) => {
 
           <Animated.View style={styles.container}>
             {
-              [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (<Card style={styles.card} key={item}>
+              [1, 2, 3, 4].map((item) => (<Card style={styles.card} key={item}>
                 <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
                 <Card.Content>
                   <Paragraph>Documents de securité</Paragraph>

@@ -1,29 +1,16 @@
 import React, {useState} from 'react';
 import {
-  Alert,
-  View,
-  Text,
-  SafeAreaView,
-  Pressable,
   ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Caption, Headline, Surface, useTheme} from 'react-native-paper';
+import { Headline, Surface, useTheme} from 'react-native-paper';
 import {Field, reduxForm} from 'redux-form/immutable';
 import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
 import SubmitButton from '@components/widgets/Button/Button';
-import {PASSWORD_RESET_FORM} from '@constants/formNames';
+import {SIGN_UP_FORM} from '@constants/formNames';
 import {normalizeLower} from '@helpers/normalize';
-import validate from '@helpers/validate';
-import {formValues, SubmissionError} from 'redux-form';
-import routenames from '@routes/index';
-import {Trans, useTranslation} from 'react-i18next';
-import AccountTypeList from './AccountTypeList';
-import {types} from '@constants/accountTypes';
-import PersonalFormFields from './PersonalFormFields';
-import EntrepriseFormFields from './EntrepriseFormFields';
-import BankFormFields from './BankFormFields';
-import ProviderFormFields from './ProviderFormFields';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 /**
  *
  * @param {*} value
@@ -42,14 +29,11 @@ const SignUpFormComponent = (props: any) => {
   const {submitting} = props;
   const navigation = useNavigation();
   const theme = useTheme();
-  const {t} = useTranslation();
-  const [type, setType] = useState(null);
   return (
     <Surface
       style={{
         flex: 1,
         flexDirection: 'column',
-        margin: 40,
         justifyContent: 'center',
         alignSelf: 'stretch',
       }}>
@@ -60,44 +44,89 @@ const SignUpFormComponent = (props: any) => {
           justifyContent: 'center',
         }}>
         <Headline style={{marginVertical: 20, alignSelf: 'center'}}>
-          {t('forms.registrationForm.sign_up')}
+          {'creer un agent'}
         </Headline>
-        {type ? (
-          type === types.personal ? (
-            <PersonalFormFields />
-          ) : type === types.entreprise ? (
-            <EntrepriseFormFields />
-          ) : type === types.bank ? (
-            <BankFormFields />
-          ) : type === types.provider ? (
-            <ProviderFormFields />
-          ) : (
-            ''
-          )
-        ) : (
-          <AccountTypeList onChoose={setType} />
-        )}
-        {type && (
+        <Field
+        name={'email'}
+        type="text"
+        keyboardType="default"
+        label={"Email"}
+        placeholder=""
+        right={() => <Icon name="account" size={60} />}
+        component={renderField}
+        normalize={normalizeLower}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required,]}
+      />
+      <Field
+        name="password"
+        type="password"
+        keyboardType="default"
+        label={'mot de passe'}
+        secureTextEntry
+        component={renderField}
+        passwordRules="required: upper; required: lower; required: digit; max-consecutive: 2; minlength: 8;"
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required]}
+      />
+      <Field
+        name="firstname"
+        type="text"
+        keyboardType="default"
+        label={'Noms'}
+        component={renderField}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required]}
+      />
+         <Field
+        name="lastname"
+        type="text"
+        keyboardType="default"
+        label={'Prenoms'}
+        component={renderField}
+        passwordRules="required: upper; required: lower; required: digit; max-consecutive: 2; minlength: 8;"
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required]}
+      />
+      <Field
+        name="profession"
+        type="text"
+        keyboardType="default"
+        label={'Profession'}
+        component={renderField}
+        style={{
+          width: '100%',
+          backgroundColor: theme.colors.surface,
+        }}
+        validate={[required]}
+      />
           <SubmitButton
             type="primary"
             filled
             onPress={props.handleSubmit}
             disabled={submitting}>
-            {t('forms.registrationForm.create_one_account_btn_text')}
+            {'creer un agent'}
           </SubmitButton>
-        )}
-        <Text
-          style={{marginTop: 20, color: 'blue'}}
-          onPress={() => navigation.navigate(routenames.SIGN_IN)}>
-          {t('forms.registrationForm.already_have_account')}
-        </Text>
+      
       </ScrollView>
     </Surface>
   );
 };
 
 export const SignUpForm = reduxForm({
-  form: PASSWORD_RESET_FORM,
+  form: SIGN_UP_FORM,
   //validate,
   //onSubmit: submit,
 })(SignUpFormComponent);

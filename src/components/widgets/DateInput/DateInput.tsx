@@ -41,15 +41,12 @@ const DateInput = (props: any) => {
     },
   });
   const onChange = (event: Event, selectedDate?: Date) => {
-    if (event.type === "set") console.log("value:", selectedDate);
+    //if (event.type === "set") console.log("value:", selectedDate);
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
     props.onChange(currentDate);
   };
-  useEffect(() => {
-
-  }, [date])
 
   return (
     <View

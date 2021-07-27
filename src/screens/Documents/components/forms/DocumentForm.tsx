@@ -1,99 +1,79 @@
 import React, { useState } from 'react';
-import { View, Text, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import {
-  TextInput,
-  useTheme,
-} from 'react-native-paper';
-import { SubmissionError } from 'redux-form';
+import { View } from 'react-native';
+import { reduxForm, SubmissionError } from 'redux-form';
 import { DOCUMENT_FORM } from '@constants/formNames';
-import FormStepContainer from '@components/stepper/StepContainer';
-import { FormStep, StepComponentProps } from '@components/stepper/Step';
 import DocumentIdentificationComponent from './steps/DocumentIdentification';
-import DocumentTasksComponent from './steps/DocumentTasks';
-import InterventionComponent from './steps/Intervention';
-import CameraInputComponent from '@components/widgets/CameraInputComponent';
+import * as documentsApi from '@routes/api/Documents';
+import { ActivityIndicator } from 'react-native-paper';
 
-export const DocumentFormComponent = (props: any) => {
+const DocumentFormComponent = reduxForm({
+  form: DOCUMENT_FORM,
+  //validate,
+  //onSubmit:onSubmit,
+})(DocumentIdentificationComponent);
+
+const DocumentForm = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const { navigation } = props;
-  const [text, setText] = React.useState('');
+
+  const [loading, setLoading] = useState(false);
   const hasUnsavedChanges = true//Boolean(text);
+  const { route, navigation } = props;
+  const { type } = route.params;
+  /* React.useEffect(
+    () =>{
+      // navigation.addListener('beforeRemove', (e: any) => {
+      //   if (!hasUnsavedChanges) {
+      //     // If we don't have unsaved changes, then we don't need to do anything
+      //     return;
+      //   }
 
-  React.useEffect(
-    () =>
-      navigation.addListener('beforeRemove', (e: any) => {
-        if (!hasUnsavedChanges) {
-          // If we don't have unsaved changes, then we don't need to do anything
-          return;
-        }
+      //   // Prevent default behavior of leaving the screen
+      //   e.preventDefault();
 
-        // Prevent default behavior of leaving the screen
-        e.preventDefault();
+      //   // Prompt the user before leaving the screen
+      //   Alert.alert(
+      //     'Discard changes?',
+      //     'You have unsaved changes. Are you sure to discard them and leave the screen?',
+      //     [
+      //       { text: "Don't leave", style: 'cancel', onPress: () => { } },
+      //       {
+      //         text: 'Discard',
+      //         style: 'destructive',
+      //         // If the user confirmed, then we dispatch the action we blocked earlier
+      //         // This will continue the action that had triggered the removal of the screen
+      //         onPress: () => navigation.dispatch(e.data.action),
+      //       },
+      //     ]
+      //   );
+      // }
+    },
+    [ hasUnsavedChanges]
+  ); */
 
-        // Prompt the user before leaving the screen
-        Alert.alert(
-          'Discard changes?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
-          [
-            { text: "Don't leave", style: 'cancel', onPress: () => { } },
-            {
-              text: 'Discard',
-              style: 'destructive',
-              // If the user confirmed, then we dispatch the action we blocked earlier
-              // This will continue the action that had triggered the removal of the screen
-              onPress: () => navigation.dispatch(e.data.action),
-            },
-          ]
-        );
-      }),
-    [navigation, hasUnsavedChanges]
-  );
   const onSubmit = (values: any) => {
-    return sleep(2000).then(() => {
-      // simulate server latency
-      if (!values.username) {
+    setLoading(true)
+    return documentsApi.add({ ...values, type: type, title: values.lieu }).then((res) => {
+      setLoading(false)
+      if (res.status != 200) {
         throw new SubmissionError({
-          username: 'User does not exist',
+          projet: 'User does not exist',
           _error: 'Login failed!',
         });
-      } else if (!values.password) {
-        throw new SubmissionError({
-          password: 'Wrong password',
-          _error: 'Login failed!',
-        });
+
+        return null;
       } else {
-        //Alert.alert(`You submitted:${JSON.stringify(values)}`);
-        // navigation.navigate(routenames.DRAWER);
+        return res;
       }
-    });
+    }).then(res => {
+      res?.json().then(json => {
+        navigation.navigate(routenames.DOCUMENT_HOME)
+      }).catch(e => { console.log(e) })
+    }).catch(e => { console.log(e) })
   };
-  return (<React.Fragment>
-    <FormStepContainer  >
-      {/* <FormStep name='time' title='date' Component={(props) => <Text>Bonjour dechet</Text>} /> */}
-      <FormStep
-        name="identification"
-        title="Identification"
-        Component={(props) => <DocumentIdentificationComponent {...props} />}
-      />
-     {/*  <FormStep
-        name="taches"
-        title="Taches"
-        Component={(props) => <DocumentTasksComponent {...props} />}
-      />
-      <FormStep
-        name="taches"
-        title="Taches"
-        Component={(props) => <CameraInputComponent {...props} />}
-      />
-      <FormStep
-        name="intervention"
-        title="Interventions"
-        Component={(props) => <InterventionComponent {...props} />}
-      /> */}
-    </FormStepContainer>
-  </React.Fragment>);
+  return (<View style={{ width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+    {loading && <ActivityIndicator animating />}
+    <DocumentFormComponent onSubmit={(values: any) => onSubmit(values)} />
+  </View>);
 };
 
-export default DocumentFormComponent;
+export default DocumentForm;

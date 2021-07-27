@@ -1,11 +1,10 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Surface} from 'react-native-paper';
+import React , { useState } from 'react';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Surface } from 'react-native-paper';
 import { SubmissionError } from 'redux-form';
-import LanguageComponent from '@components/widgets/Translation/Translation';
 import routenames from '@routes/index';
-import {SignUpForm} from './components/SignUpForm';
+import { SignUpForm } from './components/SignUpForm';
+import * as userApi from '@routes/api/Auth0';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,30 +17,34 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 
 const SignUpScreen = (props: any) => {
-  const {navigation} = props;
+
+  const [loading, setLoading] = useState(false);
+  const hasUnsavedChanges = true//Boolean(text);
+  const { route, navigation } = props;
+
   const onSubmit = (values: any) => {
-    return sleep(2000).then(() => {
-      // simulate server latency
-      if (!values.username) {
+    setLoading(true)
+    return userApi.signUp({ ...values }).then((res) => {
+      setLoading(false)
+      
+      if (res.status != 200) {
         throw new SubmissionError({
-          username: 'User does not exist',
+          projet: 'User does not exist',
           _error: 'Login failed!',
         });
-      } else if (!values.password) {
-        throw new SubmissionError({
-          password: 'Wrong password',
-          _error: 'Login failed!',
-        });
+
+        return null;
       } else {
-        //Alert.alert(`You submitted:${JSON.stringify(values)}`);
-        navigation.navigate(routenames.DRAWER);
+        res?.json().then(json => {
+          navigation.navigate(routenames.AGENTS)
+        }).catch(e => { console.log(e) });
       }
-    });
+    }).catch(e => { console.log(e) });
   };
   return (
     <Surface style={styles.container}>
-        <SignUpForm onSubmit={onSubmit}/>
-        <LanguageComponent />
+    {loading &&<ActivityIndicator animating/>}
+      <SignUpForm onSubmit={onSubmit} />
     </Surface>
   );
 };

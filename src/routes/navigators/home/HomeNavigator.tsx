@@ -18,35 +18,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import OutcomeScreen from '@screens/UserAccount/UserAccountScreen';
 import Tabbar from '@components/widgets/TabBar/TabBar';
 import { useTheme } from 'react-native-paper';
+import FormationsScreen from '@screens/Formations/FormationsScreen';
+import UserListScreen from '@screens/UserAccount/UserListScreen';
+import FormationsNavigator from '../formations/FormationsNavigator';
 
 const Tab = createBottomTabNavigator();
-export const screens = [
-  {
-    routename: routenames.HOME,
-    icon: 'home',
-    component: HomeScreen,
-    label: 'Acceuil',
-  },
-  {
-    routename: routenames.DOCUMENT,
-    icon: 'file-pdf-outline',
-    component: DocumentNavigator,
-    label: 'Documents',
-  },
-  {
-    routename: routenames.ACCOUNT,
-    icon: 'briefcase-variant-outline',
-    component: AccountNavigator,
-    label: 'Formations',
-  },
-  {
-    routename: routenames.OUTCOME,
-    icon: 'account',
-    component: OutcomeScreen,
-    label: 'Moi',
-  },
-];
-
 
 function getHeaderVisibility(route: any): boolean {
   // If the focused route is not found, we need to assume it's the initial screen
@@ -65,6 +41,36 @@ function getHeaderVisibility(route: any): boolean {
 const HomeNavigator = () => {
   const [hasSuscription, setSubscription] = useState<boolean>();
   const theme = useTheme();
+
+  const [user, setUser] = React.useState();
+
+  const screens = [
+    {
+      routename: routenames.HOME,
+      icon: 'home',
+      component: HomeScreen,
+      label: 'Acceuil',
+    },
+    {
+      routename: routenames.DOCUMENT,
+      icon: 'file-pdf-outline',
+      component: DocumentNavigator,
+      label: 'Documents',
+    },
+    {
+      routename: routenames.FORMATION,
+      icon: 'briefcase-variant-outline',
+      component: FormationsNavigator,
+      label: 'Formations',
+    },
+    {
+      routename: routenames.OUTCOME,
+      icon: 'account',
+      component: OutcomeScreen,
+      label: 'Moi',
+    },
+  ];
+  
   useEffect(() => {
     if (hasSuscription === null) {
       AsyncStorage.getItem('hasSubscription').then((value) => {
@@ -76,6 +82,12 @@ const HomeNavigator = () => {
         }
       });
     }
+    AsyncStorage.getItem('user').then(value => {
+        if (value) {
+            setUser(JSON.parse(value));
+        }
+    });
+
   }, [hasSuscription]);
 
   return (
@@ -86,7 +98,7 @@ const HomeNavigator = () => {
       tabBarOptions={(props)=>({safeAreaInsets:{bottom: 10}})}
     //tabBar={(props)=><Tabbar {...props}/>}
     >
-      {
+      { !(user?.is_admin) &&
         screens.map((screen, index) => (
           <Tab.Screen name={screen.routename} key={index} component={screen.component}
             options={({ route }) => ({
@@ -98,6 +110,28 @@ const HomeNavigator = () => {
 
             })} />
         ))
+      }
+      { (user?.is_admin) &&
+          <Tab.Screen name={routenames.HOME}  component={HomeScreen}
+            options={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => (
+                <Icon name={'home'} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
+              ),
+              tabBarLabel: 'Accueil',
+              tabBarVisible: getHeaderVisibility(route),
+
+            })} />
+      }
+      { !(user?.is_admin) &&(user?.is_manager) &&
+          <Tab.Screen name={routenames.ACCOUNT}  component={AccountNavigator}
+            options={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => (
+                <Icon name={'account-multiple-plus-outline'} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
+              ),
+              tabBarLabel: 'Agents',
+              tabBarVisible: getHeaderVisibility(route),
+
+            })} />
       }
     </Tab.Navigator>
   );

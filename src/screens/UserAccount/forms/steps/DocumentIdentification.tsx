@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import {
+  TextInput,
   useTheme,
 } from 'react-native-paper';
 import { Field } from 'redux-form';
+import { useTranslation } from 'react-i18next';
 import { renderField } from '@components/widgets/FormBuilder/FieldBuilder';
-import SubmitButton from '@components/widgets/FormBuilder/SubmitButton';
+import { StepComponentProps } from '@components/stepper/Step';
+import DateInput from '@components/widgets/DateInput/DateInput';
 
 /**
  *
@@ -25,10 +28,22 @@ const maxLength15 = maxLength(15);
  *
  * @param {*} props
  */
-const DocumentIdentificationComponent = (props) => {
+const DocumentIdentificationComponent = (props: StepComponentProps) => {
+  const { t, i18n } = useTranslation();
   //const {submitting} = props;
 
   const theme = useTheme();
+
+  const accounts_categories = [
+    {
+      value: 'Om',
+      title: 'Orange Money',
+    },
+    {
+      value: 'Mtn',
+      title: 'Mobile Money',
+    },
+  ];
 
   return (
     <View
@@ -81,16 +96,12 @@ const DocumentIdentificationComponent = (props) => {
         name={'image'}
         type="camera"
         component={renderField}
-<<<<<<< HEAD
         //normalize={normalizeLower}
-=======
->>>>>>> master
         style={{
           width: '100%',
           backgroundColor: theme.colors.surface,
           justifyContent: "center"
         }}
-<<<<<<< HEAD
       />{/* 
       <Field
         name={'nbreIntervenant'}
@@ -104,14 +115,6 @@ const DocumentIdentificationComponent = (props) => {
           backgroundColor: theme.colors.surface,
         }}
       /> */}
-=======
-      />
-        <SubmitButton
-        type="primary"
-        filled
-        onPress={()=>{props.handleSubmit();}}
-        >{"Enregistrer"}</SubmitButton>
->>>>>>> master
     </View>
   );
 };

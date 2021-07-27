@@ -22,7 +22,6 @@ const Stack = createStackNavigator();
 const LogInNavigator = () => (<Stack.Navigator initialRouteName={routenames.SIGN_IN} screenOptions={{headerShown: false}}>
     <Stack.Screen name={routenames.SIGN_IN} component={SignInScreen} options={{headerTitle: "Connexion"}}/>
     <Stack.Screen name={routenames.PASSWORD_RESET} component={PasswordResetScreen} options={{headerTitle : 'Mot de passe oublie'}}/>
-    <Stack.Screen name={routenames.SIGN_UP} component={SignUpScreen} options={{headerTitle : 'Inscription'}}/>
     <Stack.Screen name={routenames.NOTABBAR} component={NoTabBarNavigator} options={{headerShown: false}} />
     <Stack.Screen name={routenames.DRAWER} component={HomeNavigator} options={{headerTitle: "Home"}}/>
 </Stack.Navigator>);

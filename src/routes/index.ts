@@ -12,9 +12,15 @@ const ACCOUNT = 'Account';
 const ACCOUNT_CATEGORIES = 'AccountCategories';
 const ACCOUNT_FORM = 'AccountForm';
 const ACCOUNT_HOME = 'AccountHome';
+const AGENTS = 'Agents';
 const DOCUMENT = 'Documents';
 const DOCUMENT_FORM = 'DocumentsForm';
+const DOCUMENT_LIST = 'DocumentsList';
 const DOCUMENT_HOME = 'DocumentsHome';
+const FORMATION = "Formation"
+const FORMATION_FORM = "FormationForm"
+const FORMATION_HOME = "FormationHome"
+const FORMATION_DETAILS = "FormationDetails"
 const INCOME = 'Income';
 const OUTCOME = 'Outcome';
 const MODAL = 'modal';
@@ -38,11 +44,18 @@ const routenames = {
   ACCOUNT_CATEGORIES,
   ACCOUNT_HOME,
   ACCOUNT_FORM,
+  AGENTS,
   BUDGET,
   DRAWER,
   DOCUMENT,
   DOCUMENT_FORM,
   DOCUMENT_HOME,
+  DOCUMENT_LIST,
+  
+  FORMATION,
+  FORMATION_FORM,
+  FORMATION_HOME,
+  FORMATION_DETAILS,
   INCOME,
   HOME,
   LOADER,

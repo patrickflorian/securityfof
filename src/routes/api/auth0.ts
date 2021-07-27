@@ -1,5 +1,4 @@
 import { User } from "@classes/User";
-import { Alert } from "react-native";
 import { API_URL } from "@routes/api";
 
 export const login = (email: string, password: string) => {
@@ -26,7 +25,7 @@ export const logout = () => {
     });
 }
 
-export const signUp = (user: User) => {
+export const signUp = (user: any) => {
     return fetch(API_URL + '/api/login', {
         method: 'POST',
         headers: {
