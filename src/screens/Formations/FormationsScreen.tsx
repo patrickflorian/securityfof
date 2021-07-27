@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: "space-evenly",
     alignItems: 'center',
-    flexWrap:'wrap',
+    flexWrap: 'wrap',
   },
   card: {
     width: "40%",
@@ -35,56 +35,38 @@ const FormationsScreen = (props: any) => {
   };
   return (
     <>
-    
-    <AppbarComponent/> 
-    <ScrollView >
-      <View style={styles.container}>
-     {/*  <Card style={styles.card}>
-        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
-        <Card.Content>
-          <Paragraph>Documents de securité</Paragraph>
-        </Card.Content>
-        <Card.Actions>
-        <Button>Nouveau</Button>
-        </Card.Actions>
-      </Card>
-      <Card style={styles.card} >
-        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
-        <Card.Content>
-          <Paragraph>Documents de securité</Paragraph>
-        </Card.Content>
-        <Card.Actions>
-          <Button icon={"plus"}>Add</Button>
-        </Card.Actions>
-      </Card> */}
-      <View style={{width: '100%'}}>
-        <List.Item
-          title="Comportement à risque"
-          description="cette formation met en evidence les comportements à risque"
-          onPress={openFormationDetails}
-          left={props => <List.Icon {...props} icon="play-box-outline" />}
-        />
-        <List.Item
-          title="Gestion des travaux"
-          description="cette formation porte sur la gestion des travaux"
-          onPress={openFormationDetails}
-          left={props => <List.Icon {...props} icon="play-box-outline" />}
-        />
-        <List.Item
-          title="Equipements de protection"
-          description="Que connaissez vous des equipements de protection"
-          onPress={openFormationDetails}
-          left={props => <List.Icon {...props} icon="play-box-outline" />}
-        />
-        <List.Item
-          title="Travaux à risque"
-          description="les travaux à rique"
-          onPress={openFormationDetails}
-          left={props => <List.Icon {...props} icon="play-box-outline" />}
-        />
-      </View>
-      </View>
-    </ScrollView>
+
+      <AppbarComponent />
+      <ScrollView >
+        <View style={styles.container}>
+          <View style={{ width: '100%' }}>
+            <List.Item
+              title="Comportement à risque"
+              description="cette formation met en evidence les comportements à risque"
+              onPress={openFormationDetails}
+              left={props => <List.Icon {...props} icon="play-box-outline" />}
+            />
+            <List.Item
+              title="Gestion des travaux"
+              description="cette formation porte sur la gestion des travaux"
+              onPress={openFormationDetails}
+              left={props => <List.Icon {...props} icon="play-box-outline" />}
+            />
+            <List.Item
+              title="Equipements de protection"
+              description="Que connaissez vous des equipements de protection"
+              onPress={openFormationDetails}
+              left={props => <List.Icon {...props} icon="play-box-outline" />}
+            />
+            <List.Item
+              title="Travaux à risque"
+              description="les travaux à rique"
+              onPress={openFormationDetails}
+              left={props => <List.Icon {...props} icon="play-box-outline" />}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </>
   );
 };

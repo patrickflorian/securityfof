@@ -4,6 +4,8 @@ import { Badge, Text, useTheme } from 'react-native-paper';
 
 import routenames from '../../routes'
 import { color } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useState } from 'react';
 
 
 const OutcomeScreen = ({ navigation }) => {
@@ -67,6 +69,20 @@ const OutcomeScreen = ({ navigation }) => {
       backgroundColor: "#00BFFF",
     },
   });
+  const [user, setUser] = useState();
+  let mounted = true;
+  React.useEffect(() => {
+    if (mounted) {
+      AsyncStorage.getItem('user').then(value => {
+        if (value) {
+          setUser(JSON.parse(value));
+        }
+      });
+      mounted = false;
+    }
+    console.log("effect app bar button");
+    return () => { };
+  }, []);
 
   return (
     <View >
@@ -74,8 +90,8 @@ const OutcomeScreen = ({ navigation }) => {
       <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
       <View style={styles.body}>
         <View style={styles.bodyContent}>
-          <Text style={styles.name}>CHENDJOU Pierre</Text>
-          <Text style={styles.info}>Technician</Text>
+          <Text style={styles.name}>{user?.firstname?user.firstname:user?.email}</Text>
+          <Text style={styles.info}>{user?.profession}</Text>
           <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
           <View>
             <Badge theme={theme} style={{ backgroundColor: theme.colors.disabled }}>environnement</Badge>

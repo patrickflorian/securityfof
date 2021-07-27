@@ -42,20 +42,22 @@ const UserListScreen = (props: any) => {
         navigation.navigate(routenames.SIGN_UP)
       };
 
-    React.useEffect(() => {
-        if (!didMount) {
-            userApi.all()
-                .then(res => {
-                    res.json()
-                        .then((data) => { setLoading(false); setUsers(data) })
-                        .catch(e => console.log(e))
-                }).catch(e => console.log(e))
-
-        }
-        setDidMount(true);
-        return () => setDidMount(false);
-    }, []);
-
+        
+  let mounted = true;
+  React.useEffect(() => {
+    if (mounted) {
+        userApi.all()
+        .then(res => {
+            res.json()
+                .then((data) => { setLoading(false); setUsers(data) })
+                .catch(e => console.log(e))
+        }).catch(e => console.log(e))
+    }
+    console.log('effect user form');
+    return () => { 
+      mounted = false;
+    };
+  }, []);
 
     return (
         <>

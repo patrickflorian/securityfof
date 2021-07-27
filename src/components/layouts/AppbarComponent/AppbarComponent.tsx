@@ -43,14 +43,21 @@ const AppbarComponent = (props: any) => {
     },
   });
   const [user, setUser] = React.useState();
-  useEffect(() => {
-    AsyncStorage.getItem('user').then(value => {
-      if (value) {
-        setUser(JSON.parse(value));
-      }
-    });
-  })
-
+   
+  let mounted = true;
+  React.useEffect(() => {
+    if (mounted) {
+      AsyncStorage.getItem('user').then(value => {
+        if (value) {
+          setUser(JSON.parse(value));
+        }
+      });
+      mounted = false;
+    }
+      console.log("effect appbar");
+    return () => { };
+  }, []);
+  
   return (
     <Appbar.Header style={{ width: '100%' }} theme={{ ...theme, colors: { ...theme.colors, primary: theme.colors.background } }} >
       <Appbar.Content title="Welcome back" subtitle={"To Safety FOF"} />

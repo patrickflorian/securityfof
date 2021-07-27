@@ -26,7 +26,7 @@ export const logout = () => {
 }
 
 export const signUp = (user: any) => {
-    return fetch(API_URL + '/api/login', {
+    return fetch(API_URL + '/api/signup', {
         method: 'POST',
         headers: {
             Accept: 'application/json',

@@ -24,15 +24,13 @@ const SignUpScreen = (props: any) => {
 
   const onSubmit = (values: any) => {
     setLoading(true)
-    return userApi.signUp({ ...values }).then((res) => {
+    return userApi.signUp({ ...values, username: values.email }).then((res) => {
       setLoading(false)
-      
+      if (!res.ok) {
+        console.log(res.status);
+      }
       if (res.status != 200) {
-        throw new SubmissionError({
-          projet: 'User does not exist',
-          _error: 'Login failed!',
-        });
-
+        
         return null;
       } else {
         res?.json().then(json => {

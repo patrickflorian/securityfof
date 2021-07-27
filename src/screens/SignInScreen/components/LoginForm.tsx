@@ -52,7 +52,7 @@ const FormComponent = (props: any) => {
       </Headline> */}
       <Field
         //autoFocus
-        name={'username'}
+        name={'email'}
         type="text"
         keyboardType="default"
         placeholder={'email'}
@@ -135,19 +135,12 @@ export const LoginForm = (props: any)=>{
   const sleep = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
   const onSubmit = (values: any) => {
     setLoading(true);
-      return Auth0.login(values.username, values.password).then((res) => {
+      return Auth0.login(values.email, values.password).then((res) => {
         setLoading(false)
         // simulate server latency
         if(res.status != 200) {
-          throw new SubmissionError({
-            username: 'User does not exist',
-            _error: 'Login failed!',
-          });
-          throw new SubmissionError({
-            password: 'Wrong password',
-            _error: 'Login failed!',
-          });
-          return  null;
+          console.log(res.status);
+          
         } else {
           return res.json().then(json=>{
             //Alert.alert(`You submitted:${JSON.stringify(values)}`);

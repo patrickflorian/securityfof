@@ -4,8 +4,8 @@ import { API_URL } from "."
 
 const MAIN_URL = API_URL + '/api/documents';
 
-export const all = () => {
-    return fetch(MAIN_URL, {
+export const all = (type: any) => {
+    return fetch(MAIN_URL+"/type/"+type, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -15,6 +15,7 @@ export const all = () => {
     });
 }
 export const add = (data: any) => {
+  console.log(JSON.stringify(data))
     return fetch(MAIN_URL, {
         method: 'POST',
         headers: {

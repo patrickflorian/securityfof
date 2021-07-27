@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Card, Paragraph, Button, List, ActivityIndicator } from 'react-native-paper';
+import { Text, Card, Paragraph, Button, List, ActivityIndicator, Headline, Title, Subheading, Caption } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 
 import routenames from '@routes/index'
@@ -42,17 +42,20 @@ const DocumentsListScreen = (props: any) => {
   };
   const docPdf = DocumentURLS.find((item) => item.id === type)
   const [loading, setLoading] = React.useState(true)
-  const [didMount, setDidMount] = React.useState(false);
 
+  
+  let mounted = true;
   React.useEffect(() => {
-    if (!didMount){
-      docApi.all()
-        .then(res =>{ 
-            res.json().then((data) => { setLoading(false); setDocuments(data) }).catch(e => console.log(e))
-        }).catch(e => console.log(e))
+    if (mounted) {
+      docApi.all(type)
+      .then(res =>{ 
+          res.json().then((data) => { setLoading(false); setDocuments(data) }).catch(e => console.log(e))
+      }).catch(e => console.log(e))
     }
-    setDidMount(true);
-    return () =>{ setDidMount(false)};
+    console.log('effect documents form');
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
@@ -68,15 +71,16 @@ const DocumentsListScreen = (props: any) => {
           {
             documents.map((doc, index) => {
               return <Card key={index} style={styles.card}>
-                <Card.Cover source={{ uri: 'https://picsum.photos/700' }} style={styles.cardCover} />
+                <Card.Cover source={{ uri: doc.fileUrl }} style={styles.cardCover} />
                 <Card.Content>
-                  <Paragraph>Documents de securité</Paragraph>
+                  <Subheading>{doc.projet}</Subheading>
+                  <Caption>{new Date(doc.dateAjout).toLocaleDateString("fr-Fr")}</Caption>
                 </Card.Content>
                 <Card.Actions>
                   {/* <FormModalButton icon="plus" style={{}} title="Nouveau">
                           <DocumentFormComponent/>
                         </FormModalButton> */}
-                  <Button onPress={() => { openDocumentForm(type) }}>Nouveau</Button>
+                  <Button onPress={() => { openDocumentForm(type) }}>Details</Button>
                 </Card.Actions>
               </Card>
             })

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { reduxForm, SubmissionError } from 'redux-form';
 import { DOCUMENT_FORM } from '@constants/formNames';
 import DocumentIdentificationComponent from './steps/DocumentIdentification';
 import * as documentsApi from '@routes/api/Documents';
 import { ActivityIndicator } from 'react-native-paper';
+import routenames from '@routes/index';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const DocumentFormComponent = reduxForm({
   form: DOCUMENT_FORM,
@@ -16,58 +18,71 @@ const DocumentForm = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const [loading, setLoading] = useState(false);
-  const hasUnsavedChanges = true//Boolean(text);
+  let hasUnsavedChanges=true//Boolean(text);
   const { route, navigation } = props;
   const { type } = route.params;
-  /* React.useEffect(
+  const [user, setUser] = useState();
+  let mounted = true;
+ 
+  React.useEffect(
     () =>{
-      // navigation.addListener('beforeRemove', (e: any) => {
-      //   if (!hasUnsavedChanges) {
-      //     // If we don't have unsaved changes, then we don't need to do anything
-      //     return;
-      //   }
+      navigation.addListener('beforeRemove', (e: any) => {
+        if (!hasUnsavedChanges) {
+          // If we don't have unsaved changes, then we don't need to do anything
+          return;
+        }
 
-      //   // Prevent default behavior of leaving the screen
-      //   e.preventDefault();
+        // Prevent default behavior of leaving the screen
+        e.preventDefault();
 
-      //   // Prompt the user before leaving the screen
-      //   Alert.alert(
-      //     'Discard changes?',
-      //     'You have unsaved changes. Are you sure to discard them and leave the screen?',
-      //     [
-      //       { text: "Don't leave", style: 'cancel', onPress: () => { } },
-      //       {
-      //         text: 'Discard',
-      //         style: 'destructive',
-      //         // If the user confirmed, then we dispatch the action we blocked earlier
-      //         // This will continue the action that had triggered the removal of the screen
-      //         onPress: () => navigation.dispatch(e.data.action),
-      //       },
-      //     ]
-      //   );
-      // }
+        // Prompt the user before leaving the screen
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            { text: "Don't leave", style: 'cancel', onPress: () => { } },
+            {
+              text: 'Discard',
+              style: 'destructive',
+              // If the user confirmed, then we dispatch the action we blocked earlier
+              // This will continue the action that had triggered the removal of the screen
+              onPress: () => navigation.dispatch(e.data.action),
+            },
+          ]
+        );
+      });
+      if (mounted) {
+        AsyncStorage.getItem('user').then(value => {
+          if (value) {
+            setUser(JSON.parse(value));
+          }
+        });
+        mounted = false;
+      }
+      return ()=>{
+        hasUnsavedChanges= true
+      }
     },
     [ hasUnsavedChanges]
-  ); */
+  ); 
 
   const onSubmit = (values: any) => {
     setLoading(true)
-    return documentsApi.add({ ...values, type: type, title: values.lieu }).then((res) => {
+    return documentsApi.add({ ...values, type: type, title: values.lieu, User:{...user}}).then((res) => {
       setLoading(false)
-      if (res.status != 200) {
+      if (!res.ok || res.status !== 200) {
+          console.log(res.status);
+        
         throw new SubmissionError({
           projet: 'User does not exist',
           _error: 'Login failed!',
         });
-
-        return null;
       } else {
-        return res;
+        res?.json().then((json) => {
+          hasUnsavedChanges = false;
+          navigation.navigate(routenames.DOCUMENT_HOME);
+        }).catch(e => { console.log(e) })
       }
-    }).then(res => {
-      res?.json().then(json => {
-        navigation.navigate(routenames.DOCUMENT_HOME)
-      }).catch(e => { console.log(e) })
     }).catch(e => { console.log(e) })
   };
   return (<View style={{ width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>

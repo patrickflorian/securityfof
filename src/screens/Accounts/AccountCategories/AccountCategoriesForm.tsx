@@ -1,14 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {TextInput, useTheme} from 'react-native-paper';
 import {Field, reduxForm, SubmissionError} from 'redux-form';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useTranslation} from 'react-i18next';
-import {ACCOUNT_CATEGORIES_FORM} from '../../../constants/formNames';
-import SubmitButton from '../../../components/widgets/Button/Button';
-import {renderField} from '../../../components/widgets/FormBuilder/FieldBuilder';
-import routenames from '../../../routes';
+import {ACCOUNT_CATEGORIES_FORM} from '@constants/formNames';
+import SubmitButton from '@components/widgets/Button/Button';
+import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
+import routenames from '@routes/index';
 /**
  *
  * @param {*} value

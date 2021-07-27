@@ -6,6 +6,7 @@ import {
 import { Field } from 'redux-form';
 import { renderField } from '@components/widgets/FormBuilder/FieldBuilder';
 import SubmitButton from '@components/widgets/FormBuilder/SubmitButton';
+import { useEffect } from 'react';
 
 /**
  *
@@ -27,9 +28,10 @@ const maxLength15 = maxLength(15);
  */
 const DocumentIdentificationComponent = (props) => {
   //const {submitting} = props;
-
   const theme = useTheme();
-
+ useEffect(()=>{
+  console.log('effect doc form')
+ })
   return (
     <View
       style={{
@@ -39,7 +41,7 @@ const DocumentIdentificationComponent = (props) => {
         marginTop:35,
       }}>
       <Field
-        name={'dateProjet'}
+        name={'dateAjout'}
         type="date"
         keyboardType="default"
         label={'Date d\'enregistrement'}
@@ -65,7 +67,7 @@ const DocumentIdentificationComponent = (props) => {
         //validate={[required]}
       />
       <Field
-        name={'project'}
+        name={'projet'}
         type="text"
         keyboardType="default"
         label={'Projet'}
@@ -81,37 +83,17 @@ const DocumentIdentificationComponent = (props) => {
         name={'image'}
         type="camera"
         component={renderField}
-<<<<<<< HEAD
-        //normalize={normalizeLower}
-=======
->>>>>>> master
         style={{
           width: '100%',
           backgroundColor: theme.colors.surface,
           justifyContent: "center"
         }}
-<<<<<<< HEAD
-      />{/* 
-      <Field
-        name={'nbreIntervenant'}
-        type="number"
-        keyboardType="numeric"
-        label={'Nombre d\'intervenants'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-      /> */}
-=======
       />
         <SubmitButton
         type="primary"
         filled
         onPress={()=>{props.handleSubmit();}}
         >{"Enregistrer"}</SubmitButton>
->>>>>>> master
     </View>
   );
 };

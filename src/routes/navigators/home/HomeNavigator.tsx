@@ -18,8 +18,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import OutcomeScreen from '@screens/UserAccount/UserAccountScreen';
 import Tabbar from '@components/widgets/TabBar/TabBar';
 import { useTheme } from 'react-native-paper';
-import FormationsScreen from '@screens/Formations/FormationsScreen';
-import UserListScreen from '@screens/UserAccount/UserListScreen';
 import FormationsNavigator from '../formations/FormationsNavigator';
 
 const Tab = createBottomTabNavigator();
@@ -70,35 +68,31 @@ const HomeNavigator = () => {
       label: 'Moi',
     },
   ];
-  
-  useEffect(() => {
-    if (hasSuscription === null) {
-      AsyncStorage.getItem('hasSubscription').then((value) => {
-        if (value == null) {
-          AsyncStorage.setItem('hasSubscription', 'true'); // No need to wait for `setItem` to finish, although you might want to handle errors
-          setSubscription(true);
-        } else {
-          setSubscription(true);
+
+  let mounted = true;
+  React.useEffect(() => {
+    if (mounted) {
+      AsyncStorage.getItem('user').then((value) => {
+        if (value) {
+          setUser(JSON.parse(value));
         }
       });
+      mounted = false;
     }
-    AsyncStorage.getItem('user').then(value => {
-        if (value) {
-            setUser(JSON.parse(value));
-        }
-    });
+    console.log('effect nav form');
+    return () => { };
+  }, []);
 
-  }, [hasSuscription]);
 
   return (
     <Tab.Navigator
       initialRouteName={
         routenames.HOME
       }
-      tabBarOptions={(props)=>({safeAreaInsets:{bottom: 10}})}
+      tabBarOptions={(props) => ({ safeAreaInsets: { bottom: 10 } })}
     //tabBar={(props)=><Tabbar {...props}/>}
     >
-      { !(user?.is_admin) &&
+      {!(user?.is_admin) &&
         screens.map((screen, index) => (
           <Tab.Screen name={screen.routename} key={index} component={screen.component}
             options={({ route }) => ({
@@ -111,27 +105,27 @@ const HomeNavigator = () => {
             })} />
         ))
       }
-      { (user?.is_admin) &&
-          <Tab.Screen name={routenames.HOME}  component={HomeScreen}
-            options={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => (
-                <Icon name={'home'} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
-              ),
-              tabBarLabel: 'Accueil',
-              tabBarVisible: getHeaderVisibility(route),
+      {(user?.is_admin) &&
+        <Tab.Screen name={routenames.HOME} component={HomeScreen}
+          options={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => (
+              <Icon name={'home'} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
+            ),
+            tabBarLabel: 'Accueil',
+            tabBarVisible: getHeaderVisibility(route),
 
-            })} />
+          })} />
       }
-      { !(user?.is_admin) &&(user?.is_manager) &&
-          <Tab.Screen name={routenames.ACCOUNT}  component={AccountNavigator}
-            options={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => (
-                <Icon name={'account-multiple-plus-outline'} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
-              ),
-              tabBarLabel: 'Agents',
-              tabBarVisible: getHeaderVisibility(route),
+      {!(user?.is_admin) && (user?.is_manager) &&
+        <Tab.Screen name={routenames.ACCOUNT} component={AccountNavigator}
+          options={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => (
+              <Icon name={'account-multiple-plus-outline'} style={{ fontSize: 30, color: focused ? theme.colors.primary : color }} />
+            ),
+            tabBarLabel: 'Agents',
+            tabBarVisible: getHeaderVisibility(route),
 
-            })} />
+          })} />
       }
     </Tab.Navigator>
   );

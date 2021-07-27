@@ -32,7 +32,7 @@ const OnBoardingScreen = (props: any) => {
       },
       {
         backgroundColor: '#999',
-        image: <Image source={require('@res/img/logo2.jpg')} />,
+        image: <Image source={require('@res/img/logo2.jpg')} style={styles.image} />,
         title: 'Sauvegarder et partagez les documents de securité',
         subtitle: "C'est beau, n'est ce pas?",
       },

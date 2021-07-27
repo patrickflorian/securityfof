@@ -10,11 +10,6 @@ const AppModalButton = (props: any) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const [user, setUser] = React.useState();
-  AsyncStorage.getItem('user').then(value => {
-    if (value) {
-      setUser(JSON.parse(value));
-    }
-  });
   const styles = StyleSheet.create({
     container: {
       alignContent: "flex-start",
@@ -36,6 +31,19 @@ const AppModalButton = (props: any) => {
       borderRadius: 5
     },
   });
+  let mounted = true;
+  React.useEffect(() => {
+    if (mounted) {
+      AsyncStorage.getItem('user').then(value => {
+        if (value) {
+          setUser(JSON.parse(value));
+        }
+      });
+      mounted = false;
+    }
+      console.log("effect app bar button");
+    return () => { };
+  }, []);
   return (
     <>
       <Portal>

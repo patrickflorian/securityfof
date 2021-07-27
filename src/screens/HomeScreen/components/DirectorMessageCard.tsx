@@ -6,21 +6,28 @@ import { useTheme } from 'react-native-paper';
 
 const LeftContent = (props: any) => {
     const theme = useTheme();
-        return <Avatar.Text size={40} label="DI" style={{ backgroundColor: theme.colors.border }} />
-    }
-    const DirectorMessageCard = (props: any) => {
+    return <Avatar.Text size={40} label="DI" style={{ backgroundColor: theme.colors.border }} />
+}
+const DirectorMessageCard = (props: any) => {
     const [complete, setComplete] = useState(false);
     const theme = useTheme();
     const message = "Très chers collègues, comme vous le savez, la sécurité est une valeur très cher pour notre entreprise SIMTECH-3D, lors de l’exécution des différents chantiers auquel vous serez assignés, vous allez être exposé à de nombreux risque qui s’il n’est pas identifié et traité pourrais avoir des impacts négatifs sur le fonctionnement de notre entreprise, ce que nous ne souhaitons pas. A cet effet nous vous exhortons à toujours effectuer, formaliser et transmettre avant chaque intervention les documents sécurité chantiers et suivre régulièrement les formations disponibles sur cette application. Sachant compter sur votre rigueur et dévouement pour l’atteinte des objectifs sécurités fixés, nous vous exhortons à toujours mettre la sécurité aux centres de nos activés.";
 
     const [user, setUser] = React.useState();
+
+    let mounted = true;
     React.useEffect(() => {
-        AsyncStorage.getItem('user').then(value => {
-          if (value) {
-            setUser(JSON.parse(value));
-          }
-        });
-      })
+        if (mounted) {
+            AsyncStorage.getItem('user').then(value => {
+                if (value) {
+                    setUser(JSON.parse(value));
+                }
+            });
+            mounted = false;
+        }
+        console.log("director message");
+        return () => { };
+    }, []);
 
     const switchState = () => {
         setComplete(!complete);

@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { Headline, Surface, useTheme} from 'react-native-paper';
-import {Field, reduxForm} from 'redux-form/immutable';
+import {Field, reduxForm} from 'redux-form';
 import {renderField} from '@components/widgets/FormBuilder/FieldBuilder';
 import SubmitButton from '@components/widgets/Button/Button';
 import {SIGN_UP_FORM} from '@constants/formNames';
@@ -43,28 +43,23 @@ const SignUpFormComponent = (props: any) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Headline style={{marginVertical: 20, alignSelf: 'center'}}>
-          {'creer un agent'}
-        </Headline>
         <Field
         name={'email'}
         type="text"
         keyboardType="default"
         label={"Email"}
         placeholder=""
-        right={() => <Icon name="account" size={60} />}
         component={renderField}
         normalize={normalizeLower}
         style={{
           width: '100%',
           backgroundColor: theme.colors.surface,
         }}
-        validate={[required,]}
+        validate={[required]}
       />
       <Field
         name="password"
         type="password"
-        keyboardType="default"
         label={'mot de passe'}
         secureTextEntry
         component={renderField}
@@ -78,7 +73,6 @@ const SignUpFormComponent = (props: any) => {
       <Field
         name="firstname"
         type="text"
-        keyboardType="default"
         label={'Noms'}
         component={renderField}
         style={{

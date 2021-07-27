@@ -1,8 +1,5 @@
 import AppbarComponent from '@components/layouts/AppbarComponent/AppbarComponent';
-<<<<<<< HEAD
-=======
 import AsyncStorage from '@react-native-community/async-storage';
->>>>>>> master
 import FormWithStep from '@screens/FormWithStep';
 import React, {useState} from 'react';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';

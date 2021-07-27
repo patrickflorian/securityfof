@@ -7,19 +7,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
  * importer les vues quiseront gerees par ce navigateur a savoir
  * !AccountScreen
  */
-import {AccountScreen, AccountFormScreen} from '../../../screens/Accounts';
+import { SignUpScreen } from '@screens/SignUpScreen';
+import UserListScreen from '@screens/UserAccount/UserListScreen';
 
 /**
  * importer l'espace de nom  des routes
  */
 import routenames from '@routes/index'
-import AccountTabNavigator from './AccountTabNavigator';
-import AccountCategoriesScreen from '../../../screens/Accounts/AccountCategories/AccountCategories';
-<<<<<<< HEAD
-=======
-import { SignUpScreen } from '@screens/SignUpScreen';
-import UserListScreen from '@screens/UserAccount/UserListScreen';
->>>>>>> master
 
 const Stack = createStackNavigator();
 
@@ -56,7 +50,7 @@ const Header = (props: any) => {
 
 const AccountNavigator = ({}) => (
   <Stack.Navigator
-    initialRouteName={routenames.c}>
+    initialRouteName={routenames.AGENTS}>
     <Stack.Screen
       name={routenames.AGENTS}  component={UserListScreen}
       options={{headerShown: false}}

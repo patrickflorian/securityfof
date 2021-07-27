@@ -1,6 +1,6 @@
 import ButtonComponent from '@components/widgets/Button/Button';
 import React, {
-    Component
+    Component, useEffect
   } from 'react';
   
   import {
@@ -228,7 +228,11 @@ import React, {
 
 
   export const FormationDetailScreen = (props)=>{
-
+        
+    useEffect(()=>{
+      console.log("render quiz button");
+    }) 
+        
       return<> 
         <VideoPlayer />
         <ButtonComponent onPress={()=>{}}>Repondre au quizz</ButtonComponent>
