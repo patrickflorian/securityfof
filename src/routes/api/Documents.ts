@@ -1,4 +1,3 @@
-import { User } from "@classes/User"
 import { Alert } from "react-native";
 import { API_URL } from "."
 
@@ -14,15 +13,15 @@ export const all = (type: any) => {
 
     });
 }
-export const add = (data: any) => {
-  console.log(JSON.stringify(data))
+export const add = (data: FormData) => {
+  console.log((data))
     return fetch(MAIN_URL, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+          Accept: "*",
+          'Content-Type': 'multipart/form-data',
         },
-        body: JSON.stringify(data)
+        body: data
     });
 }
 

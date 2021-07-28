@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, Platform, View } from 'react-native';
 import { reduxForm, SubmissionError } from 'redux-form';
 import { DOCUMENT_FORM } from '@constants/formNames';
 import DocumentIdentificationComponent from './steps/DocumentIdentification';
@@ -18,14 +18,14 @@ const DocumentForm = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const [loading, setLoading] = useState(false);
-  let hasUnsavedChanges=true//Boolean(text);
+  let hasUnsavedChanges = true//Boolean(text);
   const { route, navigation } = props;
   const { type } = route.params;
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   let mounted = true;
- 
+
   React.useEffect(
-    () =>{
+    () => {
       navigation.addListener('beforeRemove', (e: any) => {
         if (!hasUnsavedChanges) {
           // If we don't have unsaved changes, then we don't need to do anything
@@ -59,27 +59,39 @@ const DocumentForm = (props: any) => {
         });
         mounted = false;
       }
-      return ()=>{
-        hasUnsavedChanges= true
+      return () => {
+        hasUnsavedChanges = false
       }
     },
-    [ hasUnsavedChanges]
-  ); 
+    []
+  );
+
+  const createFormData = (formValues: any = {}) => {
+    
+    const { file,  ...rest } = formValues
+    const data = new FormData();
+    data.append('file', {
+      name: file.replace(/^.*[\\\/]/, ''),
+      type: 'image/jpeg',
+      uri: Platform.OS === 'ios' ? file.replace('file://', '') : file,
+    });
+
+    Object.keys(rest).forEach((key) => {
+      data.append(key, rest[key]);
+    });
+    return data;
+  };
 
   const onSubmit = (values: any) => {
     setLoading(true)
-    return documentsApi.add({ ...values, type: type, title: values.lieu, User:{...user}}).then((res) => {
+    return documentsApi.add(createFormData({ ...values, type: type, title: values.lieu, dateAjout: values.dateAjout.toLocaleDateString(), userId: user.id })).then((res) => {
+      hasUnsavedChanges = false;
       setLoading(false)
+      console.log(res.status);
       if (!res.ok || res.status !== 200) {
-          console.log(res.status);
-        
-        throw new SubmissionError({
-          projet: 'User does not exist',
-          _error: 'Login failed!',
-        });
+        console.log(res.status);
       } else {
         res?.json().then((json) => {
-          hasUnsavedChanges = false;
           navigation.navigate(routenames.DOCUMENT_HOME);
         }).catch(e => { console.log(e) })
       }

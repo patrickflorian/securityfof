@@ -92,7 +92,7 @@ const OutcomeScreen = ({ navigation }) => {
         <View style={styles.bodyContent}>
           <Text style={styles.name}>{user?.firstname?user.firstname:user?.email}</Text>
           <Text style={styles.info}>{user?.profession}</Text>
-          <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
+          <Text style={styles.description}> </Text>
           <View>
             <Badge theme={theme} style={{ backgroundColor: theme.colors.disabled }}>environnement</Badge>
           </View>

@@ -13,18 +13,21 @@ import { DocumentURLS } from '@constants/documentTypes';
 
 import * as docApi from "@routes/api/Documents";
 import ButtonComponent from '@components/widgets/Button/Button';
+import { Icon } from 'react-native-vector-icons/MaterialCommunityIcons';
 const styles = StyleSheet.create({
   container: {
     marginTop: 15,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: "space-evenly",
+    alignContent:'center',
     alignItems: 'center',
     flexWrap: 'wrap',
   },
   card: {
-    width: "40%",
-    height: 200,
+    width: 140,
+    height: 230,
+    marginBottom: 10,
+    marginHorizontal: 10,
   },
   cardCover: {
     height: 100
@@ -36,8 +39,11 @@ const DocumentsListScreen = (props: any) => {
   const { type } = route.params;
   const [documents, setDocuments] = React.useState([]);
 
+  const title = DocumentURLS.find(doc=>doc.id ===type)?.title
+    navigation.setOptions({ title,  });
+
   const openDocumentForm = (type: String) => {
-    navigation.setOptions({ tabBarVisible: false });
+    
     navigation.navigate(routenames.DOCUMENT_FORM, { type: type })
   };
   const docPdf = DocumentURLS.find((item) => item.id === type)
@@ -46,13 +52,14 @@ const DocumentsListScreen = (props: any) => {
   
   let mounted = true;
   React.useEffect(() => {
+    mounted= true
     if (mounted) {
       docApi.all(type)
       .then(res =>{ 
           res.json().then((data) => { setLoading(false); setDocuments(data) }).catch(e => console.log(e))
       }).catch(e => console.log(e))
     }
-    console.log('effect documents form');
+    console.log(documents);
     return () => {
       mounted = false;
     };
@@ -60,11 +67,16 @@ const DocumentsListScreen = (props: any) => {
 
   return (
     <>
-      <AppbarComponent />
       {loading && <ActivityIndicator animating />}
-      <OpenURLButton url={docPdf?.url}>Telecharger le Document PDF</OpenURLButton>
-      <View style={{ marginTop: 15 }}>
-        <ButtonComponent full={false} onPress={() => openDocumentForm(type)}>Ajouter un document</ButtonComponent>
+      <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', marginTop: 5 , marginRight: 5,}}>
+        <View style={{ width: "40%"}}>
+        <OpenURLButton url={docPdf?.url} icon="file-pdf">PDF</OpenURLButton>
+
+        </View>
+        <View style={{width: "40%"}}>
+        <ButtonComponent type={"secondary"} outlined full={false} rounded onPress={() => openDocumentForm(type)} icon="file-plus">ajouter</ButtonComponent>
+    
+        </View>
       </View>
       <ScrollView >
         <View style={styles.container}>
@@ -73,8 +85,9 @@ const DocumentsListScreen = (props: any) => {
               return <Card key={index} style={styles.card}>
                 <Card.Cover source={{ uri: doc.fileUrl }} style={styles.cardCover} />
                 <Card.Content>
-                  <Subheading>{doc.projet}</Subheading>
-                  <Caption>{new Date(doc.dateAjout).toLocaleDateString("fr-Fr")}</Caption>
+                  <Subheading numberOfLines={1}>{doc.projet}</Subheading>
+                  <Text numberOfLines={1}>{doc.title}</Text>
+                  <Caption numberOfLines={1}>{new Date(doc.dateAjout).toLocaleDateString("fr-Fr")}</Caption>
                 </Card.Content>
                 <Card.Actions>
                   {/* <FormModalButton icon="plus" style={{}} title="Nouveau">

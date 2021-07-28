@@ -39,7 +39,6 @@ class CameraInputComponent extends React.Component<CameraInputProps, CameraInput
         try {
             const data = await this.camera?.takePictureAsync();
             if (data) {
-                console.log('Path to image: ' + data.uri);
                 this.switchState()
                 onFile(data.uri);
             }
@@ -54,7 +53,6 @@ class CameraInputComponent extends React.Component<CameraInputProps, CameraInput
 
     render() {
         const { value, onFile } = this.props;
-        console.log(value);
         
         const { height, width } = this.state;
         const styles = StyleSheet.create({
@@ -103,7 +101,7 @@ class CameraInputComponent extends React.Component<CameraInputProps, CameraInput
 
         return (<>
             {
-                !this.state.showCameraView && <View style={styles.buttonContainer}>
+               !value&& !this.state.showCameraView && <View style={styles.buttonContainer}>
                     <IconButton icon='camera' size={60} onPress={this.switchState} />
                     <Subheading>Prendre une photo du document</Subheading>
                 </View>

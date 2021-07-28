@@ -45,6 +45,7 @@ const UserListScreen = (props: any) => {
         
   let mounted = true;
   React.useEffect(() => {
+    mounted = true
     if (mounted) {
         userApi.all()
         .then(res => {

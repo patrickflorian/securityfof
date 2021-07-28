@@ -33,6 +33,11 @@ const SINGLE_ACCOUNT_STATS = 'SingleAccountStats';
 const DRAWER = 'Drawer';
 const SUSCRIPTION = 'Suscription';
 const NOTABBAR = 'noTabBar';
+
+const MESSAGE = 'Message';
+const MESSAGE_FORM = 'MessagesForm';
+
+const QUIZZ_FORM = 'QuizzForm';
 /**
  * Les constantes repressentants les NAvigateurs
  */
@@ -51,7 +56,9 @@ const routenames = {
   DOCUMENT_FORM,
   DOCUMENT_HOME,
   DOCUMENT_LIST,
-  
+  MESSAGE,
+  MESSAGE_FORM,
+  QUIZZ_FORM,
   FORMATION,
   FORMATION_FORM,
   FORMATION_HOME,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import {
   useTheme,
 } from 'react-native-paper';
@@ -33,11 +33,11 @@ const DocumentIdentificationComponent = (props) => {
   console.log('effect doc form')
  })
   return (
-    <View
+    <ScrollView 
       style={{
         //flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
+       // flexDirection: 'column',
+        //justifyContent: 'center',
         marginTop:35,
       }}>
       <Field
@@ -80,7 +80,7 @@ const DocumentIdentificationComponent = (props) => {
         //validate={[required]}
       />
        <Field
-        name={'image'}
+        name={'file'}
         type="camera"
         component={renderField}
         style={{
@@ -94,7 +94,7 @@ const DocumentIdentificationComponent = (props) => {
         filled
         onPress={()=>{props.handleSubmit();}}
         >{"Enregistrer"}</SubmitButton>
-    </View>
+    </ScrollView>
   );
 };
 

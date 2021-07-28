@@ -15,10 +15,9 @@ import routenames from '@routes/index'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '@screens/HomeScreen/HomeScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import OutcomeScreen from '@screens/UserAccount/UserAccountScreen';
-import Tabbar from '@components/widgets/TabBar/TabBar';
 import { useTheme } from 'react-native-paper';
 import FormationsNavigator from '../formations/FormationsNavigator';
+import { MessagesNavigator } from '../messages';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +45,7 @@ const HomeNavigator = () => {
     {
       routename: routenames.HOME,
       icon: 'home',
-      component: HomeScreen,
+      component: MessagesNavigator,
       label: 'Acceuil',
     },
     {
@@ -61,12 +60,12 @@ const HomeNavigator = () => {
       component: FormationsNavigator,
       label: 'Formations',
     },
-    {
+    /* {
       routename: routenames.OUTCOME,
       icon: 'account',
       component: OutcomeScreen,
       label: 'Moi',
-    },
+    }, */
   ];
 
   let mounted = true;

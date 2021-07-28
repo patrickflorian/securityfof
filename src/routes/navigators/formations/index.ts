@@ -1,4 +1,4 @@
-import DocumentNavigator from './FormationsNavigator';
+import FormationsNavigator from './FormationsNavigator';
 export {
-    DocumentNavigator,
+    FormationsNavigator,
 }

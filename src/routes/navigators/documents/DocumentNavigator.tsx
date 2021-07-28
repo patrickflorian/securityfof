@@ -20,13 +20,14 @@ const Stack = createStackNavigator();
 
 const DocumentNavigator = ({}) => (
   <Stack.Navigator
-    screenOptions={{
-     headerShown: false,
-    }}
+
     initialRouteName={routenames.DOCUMENT_HOME}>
     <Stack.Screen
       name={routenames.DOCUMENT_HOME}
       component={DocumentsScreen}
+      options={{
+        headerShown: false,
+       }}
     />
     <Stack.Screen
       name={routenames.DOCUMENT_LIST}

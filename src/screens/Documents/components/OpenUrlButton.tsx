@@ -1,6 +1,7 @@
 import ButtonComponent from "@components/widgets/Button/Button";
 import React, { useCallback } from "react";
 import { Alert, Linking } from "react-native";
+import { Button } from "react-native-paper";
 
 export const OpenURLButton = (props: any) => {
     const { url, children } = props;
@@ -17,5 +18,5 @@ export const OpenURLButton = (props: any) => {
       }
     }, [url]);
   
-    return <ButtonComponent onPress={handlePress} >{children}</ButtonComponent>;
+    return <Button {...props} onPress={handlePress} full ={false} >{children}</Button>;
   };
