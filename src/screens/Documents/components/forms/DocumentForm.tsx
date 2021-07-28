@@ -70,7 +70,7 @@ const DocumentForm = (props: any) => {
     
     const { file,  ...rest } = formValues
     const data = new FormData();
-    data.append('file', {
+    if(file) data.append('file', {
       name: file.replace(/^.*[\\\/]/, ''),
       type: 'image/jpeg',
       uri: Platform.OS === 'ios' ? file.replace('file://', '') : file,
