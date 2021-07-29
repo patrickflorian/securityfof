@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useTheme } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 /**
  * importer les vues quiseront gerees par ce navigateur a savoir
  * !HomeScreen, IncomeScreen , OutcomeScreen, AccountScreen
  */
-import { AccountNavigator } from '../account';
-import { DocumentNavigator } from '../documents';
+import { AccountNavigator } from '@routes/navigators/account';
+import { DocumentNavigator } from '@routes/navigators/documents';
+import { FormationsNavigator } from '@routes/navigators/formations';
+import { MessagesNavigator } from '@routes/navigators/messages';
+import HomeScreen from '@screens/HomeScreen/HomeScreen';
 
 /**
  * importer l'espace de nom  des routes
  */
 import routenames from '@routes/index'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from '@screens/HomeScreen/HomeScreen';
-import AsyncStorage from '@react-native-community/async-storage';
-import { useTheme } from 'react-native-paper';
-import FormationsNavigator from '../formations/FormationsNavigator';
-import { MessagesNavigator } from '../messages';
 
 const Tab = createBottomTabNavigator();
 

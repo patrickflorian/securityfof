@@ -14,7 +14,7 @@ import DocumentTasksComponent from './steps/DocumentTasks';
 import InterventionComponent from './steps/Intervention';
 import CameraInputComponent from '@components/widgets/CameraInputComponent';
 
-export const DocumentFormComponent = (props: any) => {
+export const FormationFormComponent = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   const [currentStep, setCurrentStep] = useState<number>(1);
   const { navigation } = props;
@@ -77,7 +77,7 @@ export const DocumentFormComponent = (props: any) => {
         title="Identification"
         Component={(props) => <DocumentIdentificationComponent {...props} />}
       />
-     {/*  <FormStep
+      <FormStep
         name="taches"
         title="Taches"
         Component={(props) => <DocumentTasksComponent {...props} />}
@@ -91,9 +91,9 @@ export const DocumentFormComponent = (props: any) => {
         name="intervention"
         title="Interventions"
         Component={(props) => <InterventionComponent {...props} />}
-      /> */}
+      />
     </FormStepContainer>
   </React.Fragment>);
 };
 
-export default DocumentFormComponent;
+export default FormationFormComponent;

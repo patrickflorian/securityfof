@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -8,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
  */
 import { LoaderScreen } from '@screens/LoaderScreen';
 import { OnBoardingScreen } from '@screens/OnBoardingScreen';
-import LogInNavigator from './LogInNavigator';
+import LogInNavigator from '@routes/navigators/LogInNavigator';
 
 /**
  * importer l'espace de nom  des routesr

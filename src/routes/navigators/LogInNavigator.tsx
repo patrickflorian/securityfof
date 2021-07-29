@@ -6,17 +6,14 @@ import { createStackNavigator } from '@react-navigation/stack';
  * !LoaderScreen, SignUpScreen , SignInScreen
  */
 import { PasswordResetScreen } from '@screens/PasswordResetScreen';
-import { SignUpScreen } from '@screens/SignUpScreen';
 import { SignInScreen } from '@screens/SignInScreen';
-import {HomeNavigator} from './home'
+import {HomeNavigator} from '@routes/navigators/home'
+import NoTabBarNavigator from '@routes/navigators/home/NoTabBarNavigator';
 
 /**
  * importer l'espace de nom  des routes
  */
 import routenames from '@routes/index'
-import DocumentFormComponent from '../../screens/Documents/components/forms/DocumentForm';
-import ModalScreen from '@screens/ModalScreen/ModalScreen';
-import NoTabBarNavigator from './home/NoTabBarNavigator';
 
 const Stack = createStackNavigator();
 const LogInNavigator = () => (<Stack.Navigator initialRouteName={routenames.SIGN_IN} screenOptions={{headerShown: false}}>
