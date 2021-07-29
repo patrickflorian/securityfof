@@ -27,13 +27,13 @@ const FormationsNavigator = ({}) => (
       component={FormationsScreen}
     />
     <Stack.Screen
-      name={routenames.FORMATION_DETAILS}
-      component={FormationDetailScreen}
-    />
-    <Stack.Screen
       name={routenames.FORMATION_FORM}
       component={FormationFormComponent}
       options={{headerShown: true, title: "Repondre au quizz"}}  
+    />
+    <Stack.Screen
+      name={routenames.FORMATION_DETAILS}
+      component={FormationDetailScreen}
     />
 
   </Stack.Navigator>

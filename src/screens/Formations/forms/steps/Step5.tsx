@@ -22,15 +22,11 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
   const options = [
     {
       value: 'a',
-      title: 'a)	avant d’intervenir toujours effectué et formalisé les documents sécurité',
+      title: 'a)	ne jamais me mettre en question et travaillez sous les ordres du chef ',
     },
     {
       value: 'b',
-      title: 'b)	avoir un esprit en éveil pour détecter les situations dangereuses',
-    },
-    {
-      value: 'c',
-      title: 'c)	ne pas dialoguer avec les autres, restez motivé et curieux',
+      title: 'b)	 jamais transverse les règles de sécurité même en cas d’urgence',
     },
   ];
 
@@ -48,8 +44,8 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
         alignItems: 'center',
         paddingVertical: 10,
       }}>
-      <Title >Question 3 </Title>
-      <Subheading>pour faire face aux comportements à risque qu’est la route il faut :</Subheading>
+      <Title >Question 5 </Title>
+      <Subheading>Dans un chantier je dois :</Subheading>
       <Caption>(cliquez sur la bonne reponse)</Caption>
       <View style={{ marginTop: 30, alignItems: 'flex-start' }}>
         {options.map((option) => {

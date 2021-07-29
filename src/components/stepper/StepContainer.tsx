@@ -95,12 +95,11 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
             this.setState((state) => {
                 return { ...state, loading: true }
             });
-            currentChild.props.onNextStep ? currentChild.props.onNextStep(values, helpers)
-                : onSubmit && onSubmit(values, helpers).then(value => {
-                    this.setState({ ...this.state, completed: true, loading: false });
-                }).catch(e => {
-                    this.setState({ ...this.state, loading: false });
-                });
+            onSubmit(values, helpers).then(value => {
+                this.setState({ ...this.state, completed: true, loading: false });
+            }).catch(e => {
+                this.setState({ ...this.state, loading: false });
+            });
         } else {
             currentChild.props.onNextStep ? currentChild.props.onNextStep(values, helpers) : setStep(currentStep + 1);
         }
@@ -171,7 +170,7 @@ class FormComponent extends Component<StepContainerProps, StepContainerState> {
 ;
 
 const StepFormContainer =(props: any) =>{
-    const Component =  reduxForm({ form: props.name, })(FormComponent);
+    const Component =  reduxForm({ form: props.name, onSubmit: props.onSubmit,})(FormComponent);
     return <><Component {...props}/></>
 }
 export default StepFormContainer;

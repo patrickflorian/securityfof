@@ -1,27 +1,14 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
-  TextInput,
+  Caption,
+  Subheading,
+  Surface,
+  Title,
+  TouchableRipple,
   useTheme,
 } from 'react-native-paper';
-import { Field } from 'redux-form';
-import { renderField } from '@components/widgets/FormBuilder/FieldBuilder';
 import { StepComponentProps } from '@components/stepper/Step';
-import DateInput from '@components/widgets/DateInput/DateInput';
-
-/**
- *
- * @param {*} value
- */
-const required = (value: any) =>
-  value || typeof value === 'number' ? undefined : 'Required';
-/**
- *
- * @param {*} max
- */
-const maxLength = (max: number) => (value: any) =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
 
 /**
  *
@@ -29,92 +16,55 @@ const maxLength15 = maxLength(15);
  */
 const DocumentIdentificationComponent = (props: StepComponentProps) => {
   //const {submitting} = props;
-
+  const [selected, setSelected] = useState('');
   const theme = useTheme();
 
-  const accounts_categories = [
+  const options = [
     {
-      value: 'Om',
-      title: 'Orange Money',
+      value: 'a',
+      title: 'a)	D’être exemplaire, respectueux, et responsable',
     },
     {
-      value: 'Mtn',
-      title: 'Mobile Money',
+      value: 'b',
+      title: 'b)	D’être exemplaire et responsable de votre sécurité et non celle des autres',
+    },
+    {
+      value: 'c',
+      title: 'c)	De faire ce que vous voulez',
     },
   ];
 
+  const styles = StyleSheet.create({
+    defaultOption: { marginTop: 10, alignItems: 'flex-start', alignSelf: 'stretch', width: '100%', paddingHorizontal: 3 },
+    activeOption: { marginTop: 10, alignItems: 'flex-start', alignSelf: 'stretch', width: '100%', paddingHorizontal: 3, backgroundColor: 'red' },
+  })
   return (
     <View
       style={{
         //flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        marginTop:35,
+        marginTop: 35,
+        alignItems: 'center',
+        paddingVertical: 10,
       }}>
-      <Field
-        name={'dateProjet'}
-        type="date"
-        keyboardType="default"
-        label={'Date d\'enregistrement'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required, maxLength15]}
-      />
-      <Field
-        name={'lieu'}
-        type="text"
-        keyboardType="default"
-        label={'Lieu'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
-      <Field
-        name={'project'}
-        type="text"
-        keyboardType="default"
-        label={'Projet'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
-       <Field
-        name={'image'}
-        type="camera"
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-          justifyContent: "center"
-        }}
-      />{/* 
-      <Field
-        name={'nbreIntervenant'}
-        type="number"
-        keyboardType="numeric"
-        label={'Nombre d\'intervenants'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-      /> */}
+      <Title >Question 1 </Title>
+      <Subheading>Aux chantiers, il vous est demandé :</Subheading>
+      <Caption>(cliquez sur la bonne reponse)</Caption>
+      <View style={{ marginTop: 30, alignItems: 'flex-start' }}>
+        {options.map((option) => {
+          return (
+            <TouchableRipple key={option.value} onPress={() => { setSelected(option.value) }}>
+              <Surface style={(selected === option.value) ? styles.activeOption : styles.defaultOption} >
+                <Caption style={{ color: theme.colors.text }}>{option.title}</Caption>
+              </Surface>
+            </TouchableRipple>
+          )
+        })}
+      </View>
     </View>
   );
 };
+
 
 export default DocumentIdentificationComponent;

@@ -1,4 +1,5 @@
 import ButtonComponent from '@components/widgets/Button/Button';
+import routenames from '@routes/index';
 import React, {
     Component, useEffect
   } from 'react';
@@ -228,13 +229,13 @@ import React, {
 
 
   export const FormationDetailScreen = (props)=>{
-        
+    const {route, navigation} = props;
     useEffect(()=>{
       console.log("render quiz button");
     }) 
         
       return<> 
         <VideoPlayer />
-        <ButtonComponent onPress={()=>{}}>Repondre au quizz</ButtonComponent>
+        <ButtonComponent onPress={()=>{navigation.navigate(routenames.FORMATION_FORM)}}>Repondre au quizz</ButtonComponent>
       </>
   }
