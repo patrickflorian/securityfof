@@ -22,15 +22,15 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
   const options = [
     {
       value: 'a',
-      title: 'a)	avant d’intervenir toujours effectué et formalisé les documents sécurité',
+      title: 'a)	le caractère de l’intervenant, la sur confiance de ce dernier ;',
     },
     {
       value: 'b',
-      title: 'b)	avoir un esprit en éveil pour détecter les situations dangereuses',
+      title: 'b)	l’inexpérience ',
     },
     {
       value: 'c',
-      title: 'c)	ne pas dialoguer avec les autres, restez motivé et curieux',
+      title: 'c)	la pression de l’entreprise qui incite à intervenir dans l’urgence',
     },
   ];
 
@@ -48,8 +48,8 @@ const DocumentIdentificationComponent = (props: StepComponentProps) => {
         alignItems: 'center',
         paddingVertical: 10,
       }}>
-      <Title >Question 3 </Title>
-      <Subheading>pour faire face aux comportements à risque qu’est la route il faut :</Subheading>
+      <Title >Question 4 </Title>
+      <Subheading>Les facteurs pouvant poussés à la précipitation sont :</Subheading>
       <Caption>(cliquez sur la bonne reponse)</Caption>
       <View style={{ marginTop: 30, alignItems: 'flex-start' }}>
         {options.map((option) => {

@@ -1,198 +1,66 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
-  TextInput,
+  Caption,
+  Subheading,
+  Surface,
+  Title,
+  TouchableRipple,
   useTheme,
 } from 'react-native-paper';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
-import { renderField } from '@components/widgets/FormBuilder/FieldBuilder';
 import { StepComponentProps } from '@components/stepper/Step';
-import DateInput from '@components/widgets/DateInput/DateInput';
-
-/**
- *
- * @param {*} value
- */
-const required = (value: any) =>
-  value || typeof value === 'number' ? undefined : 'Required';
-/**
- *
- * @param {*} max
- */
-const maxLength = (max: number) => (value: any) =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
 
 /**
  *
  * @param {*} props
  */
-const DocumentTasksComponent = (props: StepComponentProps) => {
-  const { t, i18n } = useTranslation();
+const DocumentIdentificationComponent = (props: StepComponentProps) => {
   //const {submitting} = props;
-
+  const [selected, setSelected] = useState('');
   const theme = useTheme();
 
-  const risk_natures = [
+  const options = [
     {
-      value: 'electricity',
-      title: 'Electricité',
+      value: 'a',
+      title: 'a)	Précipitation, dénégations des risques, routine, baise de la vigilance, non transmission des informations',
     },
     {
-      value: 'mecanic',
-      title: 'Mécanique',
-    },
-    {
-      value: 'environnement',
-      title: 'Environnement',
-    },
-    {
-      value: 'traffic',
-      title: 'Trafic routier',
-    },
-    {
-      value: 'chute',
-      title: 'Chute',
-    },
-    {
-      value: 'chimic',
-      title: 'Chimique',
+      value: 'b',
+      title: 'b)	Routine, baise de la vigilance, non transmission des informations, non-respect des ordres du chef chantier',
     },
   ];
 
-  const mesure_types = [
-    {
-      value: 'elimination',
-      title: 'Elimination',
-    },
-    {
-      value: 'Exposition',
-      title: 'Exposition',
-    },
-    {
-      value: 'protection',
-      title: 'Protection',
-    },
-    
-  ];
-
+  const styles = StyleSheet.create({
+    defaultOption: { marginTop: 10, alignItems: 'flex-start', alignSelf: 'stretch', width: '100%', paddingHorizontal: 3 },
+    activeOption: { marginTop: 10, alignItems: 'flex-start', alignSelf: 'stretch', width: '100%', paddingHorizontal: 3, backgroundColor: 'red' },
+  })
   return (
     <View
       style={{
         //flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        marginTop:35,
+        marginTop: 35,
+        alignItems: 'center',
+        paddingVertical: 10,
       }}>
-       <Field
-        name={'taskTaf'}
-        type="text"
-        keyboardType="default"
-        label={'TAF'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-      />
-      <Field
-        name={'danger'}
-        type="text"
-        keyboardType="default"
-        label={'Danger'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required, maxLength15]}
-      />
-      <Field
-        name={'risk'}
-        type="text"
-        keyboardType="default"
-        label={'Risque'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
-      <Field
-        name={'account_type'}
-        type="select"
-        items={risk_natures}
-        keyboardType="default"
-        label={'Nature'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        validate={[required, maxLength15]}
-        /* right={
-          <TextInput.Icon
-            name="email-outline"
-            color={theme.colors.disabled}
-            onPress={() => {}}
-          />
-        } */
-      />
-      <Field
-        name={'corrective_mesure'}
-        type="text"
-        keyboardType="default"
-        label={'Mesure corrective'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
-      <Field
-        name={'mesure_type'}
-        type="select"
-        items={mesure_types}
-        keyboardType="default"
-        label={'Type de mesure'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        validate={[required, maxLength15]}
-        /* right={
-          <TextInput.Icon
-            name="email-outline"
-            color={theme.colors.disabled}
-            onPress={() => {}}
-          />
-        } */
-      />
-      <Field
-        name={'necessary'}
-        type="text"
-        keyboardType="default"
-        label={'Equipement necessaire'}
-        component={renderField}
-        //normalize={normalizeLower}
-        style={{
-          width: '100%',
-          backgroundColor: theme.colors.surface,
-        }}
-        //validate={[required]}
-      />
+      <Title >Question 2 </Title>
+      <Subheading>s’agissant des comportements à risque :</Subheading>
+      <Caption>(cliquez sur la bonne reponse)</Caption>
+      <View style={{ marginTop: 30, alignItems: 'flex-start' }}>
+        {options.map((option) => {
+          return (
+            <TouchableRipple key={option.value} onPress={() => { setSelected(option.value) }}>
+              <Surface style={(selected === option.value) ? styles.activeOption : styles.defaultOption} >
+                <Caption style={{ color: theme.colors.text }}>{option.title}</Caption>
+              </Surface>
+            </TouchableRipple>
+          )
+        })}
+      </View>
     </View>
   );
 };
 
-export default DocumentTasksComponent;
+
+export default DocumentIdentificationComponent;

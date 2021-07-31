@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import {
-  TextInput,
-  useTheme,
-} from 'react-native-paper';
+import { Alert } from 'react-native';
+
 import { SubmissionError } from 'redux-form';
-import { DOCUMENT_FORM } from '@constants/formNames';
 import FormStepContainer from '@components/stepper/StepContainer';
 import { FormStep, StepComponentProps } from '@components/stepper/Step';
 import DocumentIdentificationComponent from './steps/DocumentIdentification';
 import DocumentTasksComponent from './steps/DocumentTasks';
 import InterventionComponent from './steps/Intervention';
-import CameraInputComponent from '@components/widgets/CameraInputComponent';
+import Step4 from './steps/Step4';
+import Step5 from './steps/Step5';
+import routenames from '@routes/index';
 
 export const FormationFormComponent = (props: any) => {
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -52,25 +49,13 @@ export const FormationFormComponent = (props: any) => {
   );
   const onSubmit = (values: any) => {
     return sleep(2000).then(() => {
+      navigation.navigate(routenames.FORMATION_DETAILS);
       // simulate server latency
-      if (!values.username) {
-        throw new SubmissionError({
-          username: 'User does not exist',
-          _error: 'Login failed!',
-        });
-      } else if (!values.password) {
-        throw new SubmissionError({
-          password: 'Wrong password',
-          _error: 'Login failed!',
-        });
-      } else {
-        //Alert.alert(`You submitted:${JSON.stringify(values)}`);
-        // navigation.navigate(routenames.DRAWER);
-      }
+  
     });
   };
   return (<React.Fragment>
-    <FormStepContainer  >
+    <FormStepContainer onSubmit={onSubmit} >
       {/* <FormStep name='time' title='date' Component={(props) => <Text>Bonjour dechet</Text>} /> */}
       <FormStep
         name="identification"
@@ -83,14 +68,19 @@ export const FormationFormComponent = (props: any) => {
         Component={(props) => <DocumentTasksComponent {...props} />}
       />
       <FormStep
-        name="taches"
-        title="Taches"
-        Component={(props) => <CameraInputComponent {...props} />}
+        name="intervention"
+        title="Interventions"
+        Component={(props) => <InterventionComponent {...props} />}
+      />
+       <FormStep
+        name="intervention"
+        title="Interventions"
+        Component={(props) => <Step4 {...props} />}
       />
       <FormStep
         name="intervention"
         title="Interventions"
-        Component={(props) => <InterventionComponent {...props} />}
+        Component={(props) => <Step5 {...props} />}
       />
     </FormStepContainer>
   </React.Fragment>);
